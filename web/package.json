@@ -1,0 +1,43 @@
+{
+  "name": "focusphone-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "node node_modules/astro/bin/astro.mjs dev --host 0.0.0.0",
+    "build": "node node_modules/astro/bin/astro.mjs check && node node_modules/astro/bin/astro.mjs build",
+    "preview": "node node_modules/astro/bin/astro.mjs preview --host 0.0.0.0",
+    "check": "node node_modules/astro/bin/astro.mjs check",
+    "prepare:assets": "node scripts/generate-social.mjs",
+    "format": "node node_modules/prettier/bin/prettier.cjs --write src tests scripts astro.config.mjs playwright.config.ts README.md PRODUCT.md DESIGN.md MOTION.md",
+    "format:check": "node node_modules/prettier/bin/prettier.cjs --check src tests scripts astro.config.mjs playwright.config.ts README.md PRODUCT.md DESIGN.md MOTION.md",
+    "install:browsers": "node node_modules/@playwright/test/cli.js install chromium firefox webkit",
+    "test:e2e": "node node_modules/@playwright/test/cli.js test",
+    "test:seo": "node scripts/verify-seo.mjs",
+    "build:production": "node scripts/build-production.mjs",
+    "test:links": "node scripts/verify-public-links.mjs",
+    "test:budgets": "node scripts/verify-budgets.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0",
+    "@lucide/astro": "^1.69.0",
+    "@tailwindcss/vite": "^4.3.4",
+    "animejs": "^4.5.0",
+    "astro": "^7.4.7",
+    "tailwindcss": "^4.3.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "sharp": "^0.35.5",
+    "typescript": "^6.0.3"
+  }
+}

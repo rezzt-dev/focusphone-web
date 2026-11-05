@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Estado del proyecto — FocusPhone"
+  description="Disponibilidad de FocusPhone: versión alpha, descarga, código y canal de consultas."
+>
+  <Header />
+  <main id="contenido" class="document section-light">
+    <div class="container">
+      <div class="document-inner">
+        <a class="back-link" href="/">
+          volver al inicio
+        </a>
+        <h1 data-intro data-animate data-animate-delay="40">
+          paso a paso.
+          <br />
+          con intención.
+        </h1>
+        <p class="lead" data-intro data-animate="settle" data-animate-delay="120">
+          FocusPhone v{site.version} está en fase alpha.
+        </p>
+        <h2>descarga y código</h2>
+        <p>
+          {site.publicProject
+            ? 'El proyecto público está disponible en GitHub.'
+            : 'El APK y el acceso público al código todavía no están disponibles. Añadiremos los enlaces cuando estén listos.'}
+        </p>
+        {site.publicProject && <a href={site.repository}>ver el proyecto en GitHub</a>}
+        <p>La app requiere Android 7.0 o posterior. Todavía no está en Google Play.</p>
+        <h2>mientras tanto</h2>
+        <p>
+          Explora la <a href="/#experiencia">demostración del launcher</a>, lee la{' '}
+          <a href="/instalar/">guía de instalación</a> y conoce sus{' '}
+          <a href="/privacidad/">permisos y privacidad</a>.
+        </p>
+        <p>
+          Puedes <a href="/#participa">preparar una idea</a> y copiarla para compartirla cuando se abra el
+          canal público.
+        </p>
+        <p>
+          El proyecto utiliza una <a href="/downloads/FOCUSPHONE-LICENSE.txt">licencia no comercial</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>

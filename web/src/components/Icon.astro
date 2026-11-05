@@ -1,0 +1,61 @@
+---
+import {
+  ArrowUpRight,
+  ArrowDown,
+  ArrowRight,
+  Download,
+  CodeXml,
+  Check,
+  Menu,
+  ShieldCheck,
+  WifiOff,
+  Smartphone,
+  Wind,
+  Sun,
+  Minus,
+  Plus,
+  Signal,
+  BatteryMedium,
+  Ellipsis,
+  Briefcase,
+  Leaf,
+  Circle,
+  Clock3,
+  LayoutGrid,
+  LockKeyhole
+} from '@lucide/astro';
+const icons = {
+  ArrowUpRight,
+  ArrowDown,
+  ArrowRight,
+  Download,
+  CodeXml,
+  Check,
+  Menu,
+  ShieldCheck,
+  WifiOff,
+  Smartphone,
+  Wind,
+  Sun,
+  Minus,
+  Plus,
+  Signal,
+  BatteryMedium,
+  Ellipsis,
+  Briefcase,
+  Leaf,
+  Circle,
+  Clock3,
+  LayoutGrid,
+  LockKeyhole
+};
+interface Props {
+  name: keyof typeof icons;
+  size?: number;
+  class?: string;
+}
+const { name, size = 20, class: className } = Astro.props;
+const Glyph = icons[name];
+---
+
+<Glyph size={size} stroke-width={1.5} aria-hidden="true" class={className} />

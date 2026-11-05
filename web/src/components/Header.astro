@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+const prefix = home ? '' : '/';
+---
+
+<header class="header" id="cabecera" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="FocusPhone, inicio">
+      <img src="/images/focusphone-icon.webp" width="29" height="29" alt="" class="brand-icon" />
+      focusphone<span class="brand-period">.</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <a href={`${prefix}#filosofia`}>la idea</a>
+      <a href={`${prefix}#experiencia`}>el launcher</a>
+      <a href={`${prefix}#perfiles`}>perfiles</a>
+      <a href={`${prefix}#preguntas`}>preguntas</a>
+    </nav>
+    <a class="header-cta" href={`${prefix}#descargar`}>
+      conseguir focusphone <Icon name="ArrowUpRight" size={16} />
+    </a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Abrir menú"
+    >
+      <Icon name="Menu" />
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Navegación móvil" hidden>
+    <a href={`${prefix}#filosofia`}>
+      la idea <Icon name="ArrowUpRight" />
+    </a>
+    <a href={`${prefix}#experiencia`}>
+      el launcher <Icon name="ArrowUpRight" />
+    </a>
+    <a href={`${prefix}#preguntas`}>
+      preguntas <Icon name="ArrowUpRight" />
+    </a>
+    <a href={`${prefix}#perfiles`}>
+      perfiles <Icon name="ArrowUpRight" />
+    </a>
+    <a href="/instalar/">
+      cómo instalarlo <Icon name="ArrowUpRight" />
+    </a>
+    <a href={`${prefix}#participa`}>
+      comparte una idea <Icon name="ArrowUpRight" />
+    </a>
+    <a href={`${prefix}#descargar`}>
+      conseguir focusphone <Icon name="Download" />
+    </a>
+  </nav>
+  <span class="scroll-progress" data-scroll-progress aria-hidden="true"></span>
+</header>

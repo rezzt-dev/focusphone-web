@@ -1,0 +1,339 @@
+/*
+ * Motion tokens: the single source of truth. CSS uses them for transitions and initial states;
+ * `src/scripts/animations/tokens.ts` reads the same custom properties for anime.js.
+ */
+:root {
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-press: 120ms;
+  --motion-feedback: 180ms;
+  --motion-state: 320ms;
+  --motion-reveal: 640ms;
+  --motion-headline: 800ms;
+  --motion-product: 950ms;
+  --motion-stagger: 55ms;
+  --motion-stagger-max: 165ms;
+  --motion-failsafe: 2400ms;
+  --motion-from-opacity: 0.3;
+  --motion-from-scale: 0.97;
+  --motion-ink-from: 0.24;
+  --motion-distance-rise: 24px;
+  --motion-distance-reveal: 16px;
+  --motion-distance-settle: 8px;
+  --motion-distance-product: 28px;
+  --ease: var(--ease-reveal);
+}
+
+/*
+ * Initial states exist only while the motion script is in charge: `pending` is set out of sight
+ * by the reveal observer, `intro` before first paint by MotionBoot. Without JavaScript neither
+ * attribute appears, so the content renders in its final state.
+ */
+[data-animate] {
+  --motion-distance: var(--motion-distance-reveal);
+}
+[data-animate='rise'] {
+  --motion-distance: var(--motion-distance-rise);
+}
+[data-animate='settle'] {
+  --motion-distance: var(--motion-distance-settle);
+}
+[data-animate='product'] {
+  --motion-distance: var(--motion-distance-product);
+}
+[data-animate='fade'],
+[data-animate='scale'],
+[data-animate='clip'] {
+  --motion-distance: 0px;
+}
+:is([data-reveal='pending'], html[data-motion='intro'] [data-intro]) {
+  opacity: var(--motion-from-opacity);
+  translate: 0 var(--motion-distance);
+}
+:is([data-reveal='pending'], html[data-motion='intro'] [data-intro])[data-animate='scale'] {
+  scale: var(--motion-from-scale);
+}
+/* Clip reveals are reserved for decorative, aria-hidden type such as the closing wordmark. */
+:is([data-reveal='pending'], html[data-motion='intro'] [data-intro])[data-animate='clip'] {
+  opacity: 1;
+  clip-path: inset(100% 0 0 0);
+}
+/* If the module never takes over, the choreography's content appears on its own. */
+html[data-motion='intro'] [data-intro] {
+  animation: motion-failsafe 1ms var(--motion-failsafe) forwards;
+}
+@keyframes motion-failsafe {
+  to {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    clip-path: none;
+  }
+}
+
+/* The header keeps its place; once the opening has passed it gains a raised surface. */
+.header {
+  transition:
+    background-color var(--motion-state) var(--ease-state),
+    box-shadow var(--motion-state) var(--ease-state);
+}
+.header[data-raised] {
+  background: var(--surface);
+  box-shadow: 0 1px 0 var(--line);
+}
+.header-inner {
+  transition: border-color var(--motion-state) var(--ease-state);
+}
+.header[data-raised] .header-inner {
+  border-bottom-color: transparent;
+}
+.header-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 24px;
+  pointer-events: none;
+}
+/* Reading progress: a hairline filled by scroll, scaled only, invisible without the script. */
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.7;
+  scale: 0 1;
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Scrubbed first steps: a darker stroke draws over each step's own line. */
+.setup-steps > li {
+  position: relative;
+}
+.step-line {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--dark-ink);
+  scale: 0 1;
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.button,
+.header-cta,
+.menu-toggle {
+  transition:
+    background-color var(--motion-feedback) var(--ease-state),
+    border-color var(--motion-feedback) var(--ease-state),
+    color var(--motion-feedback) var(--ease-state),
+    transform var(--motion-feedback) var(--ease-reveal);
+}
+.button:active,
+.header-cta:active,
+.menu-toggle:active {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: var(--motion-press);
+}
+.button > svg,
+.header-cta > svg,
+.project-links > a > svg:last-child,
+.back-top > svg,
+.scroll-cue > svg {
+  transition: translate var(--motion-state) var(--ease-reveal);
+}
+.desktop-nav a,
+.text-link,
+.footer-bottom a {
+  transition:
+    color var(--motion-feedback) var(--ease-state),
+    text-decoration-color var(--motion-feedback) var(--ease-state);
+}
+.desktop-nav a {
+  position: relative;
+}
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 8px;
+  height: 1px;
+  background: currentColor;
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--motion-state) var(--ease-reveal);
+}
+.desktop-nav a[aria-current='location'] {
+  text-decoration: none;
+}
+.desktop-nav a[aria-current='location']::after {
+  scale: 1 1;
+}
+.phone-screen,
+.phone-intention {
+  transition:
+    background-color var(--motion-state) var(--ease-state),
+    color var(--motion-state) var(--ease-state);
+}
+.phone-interactive {
+  transition: rotate var(--motion-state) var(--ease-reveal);
+}
+.theme-option,
+.segmented button,
+.profile-tabs button,
+.phone-app,
+.swatch {
+  transition:
+    color var(--motion-feedback) var(--ease-state),
+    background-color var(--motion-feedback) var(--ease-state),
+    border-color var(--motion-feedback) var(--ease-state),
+    opacity var(--motion-feedback) var(--ease-state),
+    transform var(--motion-state) var(--ease-reveal);
+}
+.theme-option:active .swatch,
+.segmented button:active,
+.profile-tabs button:active {
+  transform: scale(0.96);
+  transition-duration: var(--motion-press);
+}
+.phone-toast {
+  transition:
+    opacity var(--motion-feedback) var(--ease-state),
+    transform var(--motion-state) var(--ease-reveal);
+}
+.faq-plus {
+  transition: transform var(--motion-state) var(--ease-reveal);
+}
+.feedback-form select,
+.feedback-form textarea {
+  transition:
+    border-color var(--motion-feedback) var(--ease-state),
+    background-color var(--motion-feedback) var(--ease-state);
+}
+.feedback-form :is(select, textarea):focus {
+  border-color: var(--ink);
+  background-color: var(--surface);
+}
+
+.back-link > svg {
+  transition: translate var(--motion-state) var(--ease-reveal);
+}
+.project-links > a:active {
+  background: oklch(0.93 0 0);
+  transition-duration: var(--motion-press);
+}
+
+/* Pointer gestures are local: no follower, magnetic targets, or persistent render loop. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button:hover > svg,
+  .header-cta:hover > svg,
+  .project-links > a:hover > svg:last-child {
+    translate: 2px -2px;
+  }
+  .hero-actions .button:hover > svg,
+  .scroll-cue:hover > svg {
+    translate: 0 3px;
+  }
+  .back-top:hover > svg {
+    translate: 0 -3px;
+  }
+  .back-link:hover > svg {
+    translate: -3px 0;
+  }
+  .desktop-nav a:hover::after {
+    scale: 1 1;
+  }
+  .theme-option:hover .swatch {
+    transform: scale(1.08);
+  }
+  .phone-app:hover {
+    transform: translateX(3px);
+  }
+}
+@media (hover: none) {
+  .button:hover {
+    transform: none;
+  }
+}
+
+/* Cross-document navigation preserves the header while the story softly changes. */
+@view-transition {
+  navigation: auto;
+}
+.header {
+  view-transition-name: site-header;
+}
+main {
+  view-transition-name: story;
+}
+::view-transition-group(*) {
+  animation-duration: 240ms;
+  animation-timing-function: var(--ease-state);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+::view-transition-old(story) {
+  animation: story-out 160ms var(--ease-state) both;
+}
+::view-transition-new(story) {
+  animation: story-in 280ms var(--ease-reveal) both;
+}
+/* Returning to the home page reverses the direction: the story settles from above. */
+html:active-view-transition-type(back)::view-transition-new(story) {
+  animation-name: story-in-back;
+}
+@keyframes story-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes story-in-back {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes story-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button:hover,
+  .button:active,
+  .header-cta:active,
+  .menu-toggle:active,
+  .theme-option:active .swatch,
+  .segmented button:active,
+  .profile-tabs button:active {
+    transform: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  .header,
+  .header-inner {
+    transition: none;
+  }
+  .scroll-progress,
+  .step-line {
+    display: none;
+  }
+}

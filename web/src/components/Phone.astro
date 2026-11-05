@@ -1,0 +1,53 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  interactive?: boolean;
+  id?: string;
+}
+const { interactive = false, id = 'hero-phone' } = Astro.props;
+---
+
+<div
+  class:list={['phone', { 'phone-interactive': interactive }]}
+  id={id}
+  data-theme="slate"
+  data-tilt={interactive ? '' : undefined}
+  aria-label="Vista ilustrativa de la pantalla de inicio de FocusPhone"
+>
+  <div class="phone-hardware" aria-hidden="true">
+    <span></span>
+  </div>
+  <div class="phone-screen">
+    <div class="phone-status" aria-hidden="true">
+      <span>9:41</span>
+      <div>
+        <Icon name="Signal" size={12} />
+        <Icon name="BatteryMedium" size={15} />
+      </div>
+    </div>
+    <div class="phone-clock">
+      <span class="clock-digital">09:41</span>
+      <span class="clock-words" hidden>
+        las nueve
+        <br />y cuarenta y uno
+      </span>
+      <span class="phone-date">jueves, 5 de noviembre</span>
+    </div>
+    <div class="phone-intention">
+      <span>hoy, lo importante.</span>
+      <span>estar presente.</span>
+    </div>
+    <div class="phone-apps">
+      {['teléfono', 'mensajes', 'cámara', 'música', 'notas', 'mapas'].map((app) => (
+        <span data-demo-label={interactive ? app : undefined}>{app}</span>
+      ))}
+    </div>
+    <div class="phone-profile">
+      <span class="profile-dot"></span>
+      <span class="phone-profile-label">modo normal</span>
+      <Icon name="Ellipsis" size={16} />
+    </div>
+    {interactive && <div class="phone-toast" role="status" aria-live="polite"></div>}
+    <div class="phone-home" aria-hidden="true"></div>
+  </div>
+</div>

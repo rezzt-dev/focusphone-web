@@ -1,0 +1,757 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Phone from '../components/Phone.astro';
+import Icon from '../components/Icon.astro';
+import { site, faqs } from '../data/site';
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'FocusPhone',
+  operatingSystem: 'Android 7.0+',
+  applicationCategory: 'UtilitiesApplication',
+  softwareVersion: site.version,
+  description: site.description,
+  ...(site.publicProject ? { downloadUrl: site.releases, codeRepository: site.repository } : {}),
+  inLanguage: ['en', 'es', 'fr', 'de'],
+  isAccessibleForFree: true
+};
+---
+
+<Base>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(appSchema)} />
+  <Header home />
+  <main id="contenido">
+    <section class="hero" aria-labelledby="hero-title" data-header-until data-parallax-scope>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <a href="#descargar" class="alpha-label">
+            <span class="status-dot"></span>v{site.version} alpha · android 7.0+{' '}
+            <Icon name="ArrowUpRight" size={14} />
+          </a>
+          <h1 id="hero-title">
+            <span data-intro data-animate="rise" data-animate-delay="60">
+              menos pantalla.
+            </span>
+            <span class="hero-second" data-intro data-animate="rise" data-animate-delay="150">
+              más vida<span class="hero-dot">.</span>
+            </span>
+          </h1>
+          <p class="hero-description" data-intro data-animate="settle" data-animate-delay="170">
+            Un launcher minimalista para Android.
+            <br />
+            Transforma tu Android en lo que necesitas.
+            <br class="desktop-break" /> Y deja espacio para todo lo demás.
+          </p>
+          <div class="hero-actions" data-intro data-animate="settle" data-animate-delay="235">
+            <a href="#experiencia" class="button button-light">
+              prueba la experiencia <Icon name="ArrowDown" size={19} />
+            </a>
+            <a href="/instalar/" class="text-link">
+              cómo instalarlo{' '}
+              <span class="play-circle" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </div>
+          <div class="hero-meta" data-intro data-animate="settle" data-animate-delay="300">
+            <span>
+              <Icon name="Smartphone" size={14} /> android 7.0+
+            </span>
+            <span>sin anuncios</span>
+            <span>sin cuentas</span>
+            <span>{site.publicProject ? 'APK en GitHub' : 'descarga todavía no disponible'}</span>
+          </div>
+        </div>
+        <div class="hero-product">
+          <div class="orbit orbit-one" aria-hidden="true"></div>
+          <div class="orbit orbit-two" aria-hidden="true" data-parallax="16"></div>
+          <div
+            class="orbit orbit-three"
+            aria-hidden="true"
+            data-parallax="32"
+            data-parallax-scale="0.035"
+          ></div>
+          <div class="product-caption caption-top" data-intro data-animate="settle" data-animate-delay="380">
+            <span class="caption-line"></span>solo lo que importa.
+          </div>
+          <div class="hero-phone-wrap" data-intro data-animate="product" data-animate-delay="100">
+            <Phone />
+          </div>
+          <div
+            class="product-caption caption-bottom"
+            data-intro
+            data-animate="settle"
+            data-animate-delay="450"
+          >
+            <span class="tiny-plus" aria-hidden="true">
+              +
+            </span>
+            un poco menos de todo.
+            <br />
+            <span>un poco más de ti.</span>
+          </div>
+        </div>
+      </div>
+      <div class="container hero-bottom">
+        <a href="#filosofia" class="scroll-cue">
+          <span class="scroll-line" aria-hidden="true"></span>desliza. sin prisa.
+          <Icon name="ArrowDown" size={14} />
+        </a>
+        <span>concebido para usarlo menos.</span>
+        <span class="hero-index" aria-hidden="true">
+          focus / 01
+        </span>
+      </div>
+    </section>
+
+    <div class="principles-strip">
+      <div class="container" data-stagger="settle">
+        <span>
+          <Icon name="WifiOff" size={17} /> funciona sin internet
+        </span>
+        <span>
+          <Icon name="ShieldCheck" size={17} /> tus datos se quedan contigo
+        </span>
+        <span>
+          <Icon name="CodeXml" size={17} />{' '}
+          {site.publicProject ? 'código disponible' : 'código en desarrollo'}
+        </span>
+        <span>
+          <Icon name="Minus" size={17} /> menos distracciones, por diseño
+        </span>
+      </div>
+    </div>
+
+    <section class="manifesto section-light" id="filosofia" aria-labelledby="idea-title">
+      <div class="container manifesto-grid">
+        <div class="section-note">
+          <span class="small-line"></span>la idea es sencilla.
+        </div>
+        <div>
+          <h2 id="idea-title" class="manifesto-heading" data-scrub="ink" data-scrub-leave="55% bottom">
+            <span data-scrub-item>Cogiste el móvil</span>
+            <br />
+            <span data-scrub-item>para mirar la hora.</span>
+            <br />
+            <span class="muted-heading" data-scrub-item>
+              ¿cómo acabaste aquí?
+            </span>
+          </h2>
+          <div class="manifesto-bottom" data-stagger>
+            <p>
+              Un icono. Una notificación. Otra aplicación.
+              <br />A veces, una mirada se convierte en media tarde.
+            </p>
+            <p>
+              FocusPhone te propone otro inicio: un reloj, tus aplicaciones esenciales y espacio para decidir.{' '}
+              <strong>Lo abres con un propósito. Lo dejas cuando terminas.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience section-light" id="experiencia" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <h2 id="experience-title">
+            lo esencial.
+            <br />
+            <span class="muted-heading">a tu manera.</span>
+          </h2>
+          <p>
+            Un inicio que se adapta a ti.
+            <br />
+            Toca, cambia y encuentra tu calma.
+          </p>
+        </div>
+        <div class="experience-stage">
+          <div class="experience-controls" data-animate>
+            <div class="control-block">
+              <span class="control-label">un tono para cada momento</span>
+              <div class="theme-options" role="group" aria-label="Tema de la vista previa">
+                <button type="button" class="theme-option" data-theme-choice="slate" aria-pressed="true">
+                  <span class="swatch swatch-slate"></span>slate
+                  <Icon name="Check" size={13} />
+                </button>
+                <button type="button" class="theme-option" data-theme-choice="offwhite" aria-pressed="false">
+                  <span class="swatch swatch-white"></span>off-white
+                  <Icon name="Check" size={13} />
+                </button>
+                <button type="button" class="theme-option" data-theme-choice="beige" aria-pressed="false">
+                  <span class="swatch swatch-beige"></span>warm beige
+                  <Icon name="Check" size={13} />
+                </button>
+                <button type="button" class="theme-option" data-theme-choice="navy" aria-pressed="false">
+                  <span class="swatch swatch-navy"></span>navy
+                  <Icon name="Check" size={13} />
+                </button>
+              </div>
+            </div>
+            <div class="control-block clock-control">
+              <span class="control-label">la hora, como tú la ves</span>
+              <div class="segmented" role="group" aria-label="Estilo de reloj de la vista previa">
+                <button type="button" data-clock="digital" aria-pressed="true">
+                  09:41
+                </button>
+                <button type="button" data-clock="words" aria-pressed="false">
+                  en palabras
+                </button>
+              </div>
+            </div>
+            <p class="demo-note">
+              <span class="status-dot"></span>vista interactiva ilustrativa
+              <br />
+              <span>toca una app para explorar.</span>
+            </p>
+          </div>
+          <div class="experience-phone" data-animate="scale">
+            <Phone interactive id="demo-phone" />
+          </div>
+          <div class="experience-features" data-stagger>
+            <article>
+              <span class="feature-sign">Aa</span>
+              <h3>palabras, no reclamos.</h3>
+              <p>Hasta 10 favoritas, solo texto. Tus otras apps siguen a un gesto de distancia.</p>
+            </article>
+            <article>
+              <Icon name="LayoutGrid" size={23} />
+              <h3>tu propio espacio.</h3>
+              <p>Organiza el reloj, tus apps y widgets en una cuadrícula que puedes ajustar.</p>
+            </article>
+            <article>
+              <Icon name="Sun" size={23} />
+              <h3>calma a cualquier hora.</h3>
+              <p>Cuatro temas, colores personalizados y un modo que sigue el día y la noche.</p>
+            </article>
+            <span class="stage-footnote">5 estilos de reloj · 20 widgets propios</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="profiles" id="perfiles" aria-labelledby="profiles-title">
+      <div class="container profiles-grid">
+        <div class="profiles-intro" data-animate>
+          <span class="section-note">
+            <span class="small-line"></span>cada momento tiene su modo.
+          </span>
+          <h2 id="profiles-title">
+            ahora,
+            <br />
+            estás aquí.
+          </h2>
+          <p>
+            Hay tiempo para conectar.
+            <br />
+            Tiempo para concentrarte.
+            <br />Y tiempo para dejar el móvil.
+          </p>
+          <a class="text-link" href="/instalar/">
+            empieza a tu ritmo <Icon name="ArrowUpRight" size={17} />
+          </a>
+        </div>
+        <div class="profile-demo" data-animate>
+          <div class="profile-tabs" role="tablist" aria-label="Perfiles del launcher">
+            <button
+              id="tab-normal"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-normal"
+              data-profile="normal"
+            >
+              <Icon name="Circle" size={17} /> normal
+            </button>
+            <button
+              id="tab-work"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-work"
+              tabindex="-1"
+              data-profile="work"
+            >
+              <Icon name="Briefcase" size={17} /> trabajo
+            </button>
+            <button
+              id="tab-detox"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-detox"
+              tabindex="-1"
+              data-profile="detox"
+            >
+              <Icon name="Leaf" size={17} /> detox
+            </button>
+          </div>
+          <div
+            class="profile-panel"
+            id="panel-normal"
+            role="tabpanel"
+            aria-labelledby="tab-normal"
+            tabindex="0"
+          >
+            <span class="profile-state">
+              <span class="status-dot"></span>a tu ritmo
+            </span>
+            <h3>
+              tú eliges
+              <br />
+              qué abrir.
+            </h3>
+            <p>
+              Todas tus aplicaciones disponibles. Un inicio despejado para hacer lo que has venido a hacer.
+            </p>
+            <div class="profile-app-list">
+              <span>
+                teléfono <Icon name="ArrowUpRight" size={16} />
+              </span>
+              <span>
+                mensajes <Icon name="ArrowUpRight" size={16} />
+              </span>
+              <span>
+                música <Icon name="ArrowUpRight" size={16} />
+              </span>
+            </div>
+          </div>
+          <div
+            class="profile-panel"
+            id="panel-work"
+            role="tabpanel"
+            aria-labelledby="tab-work"
+            tabindex="0"
+            hidden
+          >
+            <span class="profile-state">
+              <span class="status-dot"></span>un espacio para concentrarte
+            </span>
+            <h3>
+              cada cosa,
+              <br />a su tiempo.
+            </h3>
+            <p>
+              Bloquea las apps que te distraen mediante una lista propia y palabras clave. Lo que necesitas
+              para trabajar, a mano.
+            </p>
+            <div class="profile-app-list">
+              <span>
+                notas <Icon name="ArrowUpRight" size={16} />
+              </span>
+              <span>
+                calendario <Icon name="ArrowUpRight" size={16} />
+              </span>
+              <span class="blocked-app">
+                redes sociales <Icon name="LockKeyhole" size={16} />
+              </span>
+            </div>
+          </div>
+          <div
+            class="profile-panel"
+            id="panel-detox"
+            role="tabpanel"
+            aria-labelledby="tab-detox"
+            tabindex="0"
+            hidden
+          >
+            <span class="profile-state">
+              <span class="status-dot"></span>un compromiso contigo
+            </span>
+            <h3>
+              permítete
+              <br />
+              desconectar.
+            </h3>
+            <p>
+              Una sesión con temporizador que bloquea las apps. Termina por sí sola; para salir antes,
+              necesitas tu contraseña.
+            </p>
+            <div class="detox-preview">
+              <span>30:00</span>
+              <span>un ejemplo de tiempo para ti.</span>
+            </div>
+          </div>
+          <div class="profile-demo-footer">
+            <Icon name="Clock3" size={16} />
+            <p>¿necesitas algo más concreto? añade horarios y límites diarios por app.</p>
+          </div>
+        </div>
+      </div>
+      <div class="container permission-note">
+        <Icon name="ShieldCheck" size={16} />
+        <p>
+          Los bloqueos fuera del launcher y los límites diarios necesitan el servicio de accesibilidad
+          opcional. <a href="/privacidad/#permisos">Así funciona.</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="breathing" aria-labelledby="breath-title">
+      <div class="container breathing-grid">
+        <div class="breath-visual" data-animate="scale">
+          <div class="breath-ring ring-outer" aria-hidden="true"></div>
+          <div class="breath-ring ring-middle" aria-hidden="true"></div>
+          <div class="breath-orb" aria-hidden="true"></div>
+          <div class="breath-center">
+            <Icon name="Wind" size={24} />
+            <span id="breath-phase">un instante.</span>
+          </div>
+          <span class="breath-annotation">inhala. exhala. decide.</span>
+        </div>
+        <div class="breath-copy" data-animate>
+          <span class="section-note">
+            <span class="small-line"></span>la pausa consciente.
+          </span>
+          <h2 id="breath-title">
+            antes de abrir,
+            <br />
+            respira.
+          </h2>
+          <p>A veces solo necesitas un segundo para preguntarte: ¿para qué he venido?</p>
+          <p>
+            Activa una respiración guiada antes de abrir una app. Un pequeño espacio entre el impulso y tu
+            decisión.
+          </p>
+          <button type="button" class="button button-outline" id="breath-start">
+            <Icon name="Wind" size={18} />
+            <span>regálate una pausa</span>
+            <Icon name="ArrowRight" size={18} />
+          </button>
+          <p class="breath-status" id="breath-status" aria-live="polite">
+            Una demostración de 8 segundos. Solo para ti.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy section-light" id="privacidad" aria-labelledby="privacy-title">
+      <div class="container privacy-grid" data-stagger>
+        <div>
+          <span class="privacy-symbol" aria-hidden="true">
+            <Icon name="ShieldCheck" size={52} />
+          </span>
+          <h2 id="privacy-title">
+            tu atención es tuya.
+            <br />
+            <span class="muted-heading">tus datos, también.</span>
+          </h2>
+        </div>
+        <div class="privacy-content">
+          <p>
+            FocusPhone no tiene permiso de Internet. No hay cuentas, anuncios ni telemetría. Tu configuración
+            vive en tu teléfono.
+          </p>
+          <div class="privacy-proof">
+            <span>
+              <Icon name="WifiOff" size={19} /> sin conexión, por diseño
+            </span>
+            <span>
+              <Icon name="LockKeyhole" size={19} /> datos sensibles cifrados
+            </span>
+            <span>
+              <Icon name="CodeXml" size={19} />{' '}
+              {site.publicProject ? 'código que puedes consultar' : 'un proyecto en desarrollo'}
+            </span>
+          </div>
+          <a href="/privacidad/" class="text-link text-link-dark">
+            conoce los detalles de privacidad <Icon name="ArrowUpRight" size={17} />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="open-project section-light" id="proyecto" aria-labelledby="project-title">
+      <div class="container">
+        <div class="project-heading" data-animate>
+          <span class="section-note">
+            <span class="small-line"></span>un proyecto a la vista.
+          </span>
+          <h2 id="project-title">
+            la confianza se construye.
+            <br />
+            <span class="muted-heading">y se puede comprobar.</span>
+          </h2>
+          <p>Estamos en alpha. Explora cómo funciona y consulta el estado de su publicación.</p>
+        </div>
+        <div class="project-links" data-stagger>
+          <a href={site.repository}>
+            <Icon name="CodeXml" size={25} />
+            <span>
+              <strong>mira dentro.</strong>
+              <span>
+                {site.publicProject
+                  ? 'Consulta el código y su licencia no comercial.'
+                  : 'Conoce el estado del código y su licencia.'}
+              </span>
+            </span>
+            <Icon name="ArrowUpRight" size={20} />
+          </a>
+          <a
+            href={site.releases}
+            data-conversion={site.publicProject ? 'releases' : 'availability'}
+            data-location="project"
+          >
+            <Icon name="Clock3" size={25} />
+            <span>
+              <strong>sigue cada paso.</strong>
+              <span>
+                {site.publicProject
+                  ? 'Versiones, notas y archivos en GitHub Releases.'
+                  : 'Comprueba cuándo estará disponible la descarga.'}
+              </span>
+            </span>
+            <Icon name="ArrowUpRight" size={20} />
+          </a>
+          <a href={site.documentation}>
+            <Icon name="LayoutGrid" size={25} />
+            <span>
+              <strong>entiende tu inicio.</strong>
+              <span>Guías de uso y documentación en español.</span>
+            </span>
+            <Icon name="ArrowUpRight" size={20} />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="first-steps section-light" id="empezar" aria-labelledby="steps-title">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <div>
+            <span class="section-note">
+              <span class="small-line"></span>un cambio pequeño.
+            </span>
+            <h2 id="steps-title">
+              tu móvil de siempre.
+              <br />
+              <span class="muted-heading">otro punto de partida.</span>
+            </h2>
+          </div>
+          <a class="text-link text-link-dark" href="/instalar/">
+            ver la guía completa <Icon name="ArrowUpRight" size={18} />
+          </a>
+        </div>
+        <ol class="setup-steps" data-stagger data-scrub="draw" data-scrub-leave="center bottom">
+          <li>
+            <span class="step-line" aria-hidden="true" data-scrub-item></span>
+            <span class="step-number" aria-hidden="true" data-scrub-mark>
+              01
+            </span>
+            <h3>instala con calma.</h3>
+            <p>
+              Consulta primero la disponibilidad del APK. Necesitas Android 7.0 o posterior; no hace falta
+              root.
+            </p>
+          </li>
+          <li>
+            <span class="step-line" aria-hidden="true" data-scrub-item></span>
+            <span class="step-number" aria-hidden="true" data-scrub-mark>
+              02
+            </span>
+            <h3>elige un nuevo inicio.</h3>
+            <p>
+              Abre FocusPhone y selecciónalo como pantalla de inicio predeterminada en los ajustes de Android.
+            </p>
+          </li>
+          <li>
+            <span class="step-line" aria-hidden="true" data-scrub-item></span>
+            <span class="step-number" aria-hidden="true" data-scrub-mark>
+              03
+            </span>
+            <h3>deja lo esencial.</h3>
+            <p>
+              Elige hasta diez favoritas. Ajusta el tema y el reloj. El resto de tus apps sigue en el cajón.
+            </p>
+          </li>
+        </ol>
+        <p class="reassurance" data-animate="fade">
+          <Icon name="Check" size={18} />
+          Puedes volver a tu launcher anterior desde ajustes. Tus apps, fotos y archivos siguen contigo.
+        </p>
+      </div>
+    </section>
+
+    <section class="faq section-light" id="preguntas" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div data-animate>
+          <h2 id="faq-title">
+            con calma.
+            <br />
+            <span class="muted-heading">sin dudas.</span>
+          </h2>
+          <p>
+            Lo que quizá te estés preguntando
+            <br />
+            antes de cambiar tu inicio.
+          </p>
+          <a href={site.issues} class="text-link text-link-dark">
+            {site.publicProject ? '¿hablamos en GitHub?' : 'prepara tu idea'}{' '}
+            <Icon name="ArrowUpRight" size={16} />
+          </a>
+        </div>
+        <div class="faq-items" data-stagger>
+          {faqs.map((faq, i) => (
+            <details class="faq-item" data-disclosure>
+              <summary>
+                <span>{faq.question}</span>
+                <span class="faq-plus" aria-hidden="true">
+                  <Icon name="Plus" size={20} />
+                </span>
+              </summary>
+              <div class="faq-answer" data-disclosure-content>
+                <p>{faq.answer}</p>
+                {i === 2 && (
+                  <a href="/instalar/">
+                    ver la guía de instalación <Icon name="ArrowUpRight" size={15} />
+                  </a>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="feedback" id="participa" aria-labelledby="feedback-title">
+      <div class="container feedback-grid">
+        <div class="feedback-copy" data-animate>
+          <span class="section-note">
+            <span class="small-line"></span>hecho para la vida real.
+          </span>
+          <h2 id="feedback-title">
+            hay espacio
+            <br />
+            para tu idea.
+          </h2>
+          <p>¿Algo que no encaja en tu día a día? Ayúdanos a pensar el siguiente paso de focusphone.</p>
+          <a href={site.publicProject ? site.issues : site.repository} class="text-link">
+            {site.publicProject ? 'ver las conversaciones en GitHub' : 'consulta el estado del proyecto'}{' '}
+            <Icon name="ArrowUpRight" size={17} />
+          </a>
+        </div>
+        <form
+          class="feedback-form"
+          data-animate
+          action={site.publicProject ? `${site.issues}/new` : undefined}
+          data-issues-url={site.publicProject ? `${site.issues}/new` : undefined}
+          method="get"
+          aria-labelledby="feedback-title"
+          aria-describedby="feedback-notice"
+        >
+          <label for="feedback-topic">¿qué te gustaría compartir?</label>
+          <select id="feedback-topic" name="title" required>
+            <option value="" disabled selected>
+              elige un tema
+            </option>
+            <option value="[idea] Una idea para FocusPhone">una idea</option>
+            <option value="[consulta] Una duda sobre FocusPhone">una duda</option>
+            <option value="[error] Algo no funciona como esperaba">un problema con la app</option>
+          </select>
+          <label for="feedback-message">te leemos.</label>
+          <textarea
+            id="feedback-message"
+            name="body"
+            rows="4"
+            minlength="20"
+            maxlength="2000"
+            required
+            placeholder="Cuéntanos qué necesitas y en qué momento te ayudaría."
+            aria-describedby="feedback-hint feedback-notice"
+          ></textarea>
+          <p class="form-hint" id="feedback-hint">
+            Entre 20 y 2.000 caracteres. No incluyas contraseñas ni datos personales.
+          </p>
+          <button class="button button-light" type="submit" data-feedback-submit disabled>
+            {site.publicProject ? 'preparar consulta en GitHub' : 'preparar mi idea'}{' '}
+            <Icon name="ArrowUpRight" size={18} />
+          </button>
+          <p class="form-notice" id="feedback-notice">
+            {site.publicProject
+              ? 'Abrirás un borrador en GitHub con este texto. Necesitas una cuenta allí; tú decides si lo publicas. Las consultas publicadas son públicas. Esta web no guarda tu mensaje.'
+              : 'El canal público de consultas todavía no está disponible. Puedes preparar y copiar tu idea para compartirla cuando se abra. Este texto permanece en esta página y no se envía ni se guarda.'}
+          </p>
+          <p class="feedback-status" role="status" aria-live="polite"></p>
+          <div class="draft-fallback" hidden>
+            <label for="feedback-draft">tu borrador, listo para copiar</label>
+            <textarea id="feedback-draft" rows="6" readonly></textarea>
+            <button type="button" class="button button-outline" data-copy-draft>
+              copiar texto
+            </button>
+            {site.publicProject && (
+              <a class="text-link" href={`${site.issues}/new`} data-empty-draft>
+                abrir GitHub y pegar el texto
+              </a>
+            )}
+          </div>
+          <noscript>
+            <p>
+              Para preparar el borrador sin JavaScript, copia tu texto manualmente.
+              {site.publicProject && <a href={`${site.issues}/new`}> abre una consulta en GitHub</a>}
+            </p>
+          </noscript>
+        </form>
+      </div>
+    </section>
+
+    <section class="download" id="descargar" aria-labelledby="download-title">
+      <div class="container download-inner" data-animate>
+        <span class="alpha-label">
+          <span class="status-dot"></span>v{site.version} alpha · para android 7.0+
+        </span>
+        <h2 id="download-title">
+          un nuevo inicio.
+          <br />
+          <span>el resto es vida.</span>
+        </h2>
+        <p>
+          Tu móvil ya tiene suficiente.
+          <br />
+          Dale un poco de espacio.
+        </p>
+        <div class="download-actions">
+          <a
+            class="button button-light"
+            href={site.releases}
+            data-conversion={site.publicProject ? 'releases' : 'availability'}
+            data-location="download"
+          >
+            <Icon name="Download" size={18} />
+            {site.publicProject ? 'ver descargas en GitHub' : 'consultar disponibilidad'}{' '}
+            <Icon name="ArrowUpRight" size={18} />
+          </a>
+          <a
+            class="button button-outline"
+            href={site.repository}
+            data-conversion={site.publicProject ? 'repository' : 'project'}
+            data-location="download"
+          >
+            <Icon name="CodeXml" size={18} />
+            {site.publicProject ? 'ver el proyecto en GitHub' : 'estado del proyecto'}
+          </a>
+        </div>
+        <p class="download-note">
+          Estamos en alpha y seguimos afinando la experiencia.
+          <br />
+          {site.publicProject
+            ? 'Consulta los APK disponibles en Releases. Aún no está en Google Play.'
+            : 'La descarga pública todavía no está disponible. Aún no está en Google Play.'}
+        </p>
+        <a href="/instalar/" class="installation-link">
+          ¿primera vez instalando un APK? te acompañamos. <Icon name="ArrowRight" size={16} />
+        </a>
+      </div>
+      <div class="wordmark" aria-hidden="true" data-animate="clip">
+        focusphone<span>.</span>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import '../scripts/breath';
+  import '../scripts/feedback';
+</script>

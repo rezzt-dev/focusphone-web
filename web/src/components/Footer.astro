@@ -1,0 +1,37 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+
+<footer class="footer">
+  <div class="container footer-top">
+    <a class="brand" href="/" aria-label="FocusPhone, inicio">
+      <img src="/images/focusphone-icon.webp" width="29" height="29" alt="" class="brand-icon" />
+      focusphone.
+    </a>
+    <p>tu teléfono. tus términos.</p>
+    <a href="#cabecera" class="back-top">
+      volver arriba <Icon name="ArrowUpRight" size={17} />
+    </a>
+  </div>
+  <div class="container footer-bottom">
+    <span>
+      un proyecto de <a href="https://github.com/rezzt-dev">rezzt</a> · hecho con intención.
+    </span>
+    <nav aria-label="Enlaces del pie">
+      <a href="/privacidad/">privacidad</a>
+      <a href="/instalar/">instalación</a>
+      <a href={site.documentation}>documentación</a>
+      <a href="/#participa">participa</a>
+      <a
+        href={site.repository}
+        data-conversion={site.publicProject ? 'repository' : 'project'}
+        data-location="footer"
+      >
+        {site.publicProject ? 'código fuente' : 'estado del proyecto'} <Icon name="ArrowUpRight" size={13} />
+      </a>
+      <a href="/downloads/FOCUSPHONE-LICENSE.txt">licencia</a>
+    </nav>
+    <span>android · v{site.version} alpha</span>
+  </div>
+</footer>

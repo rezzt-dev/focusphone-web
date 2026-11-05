@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Privacidad y permisos — FocusPhone"
+  description="Qué datos guarda FocusPhone, por qué funciona sin Internet y para qué sirven sus permisos opcionales. Información de privacidad de la aplicación y esta web."
+>
+  <Header />
+  <main id="contenido" class="document section-light">
+    <div class="container">
+      <div class="document-inner">
+        <a class="back-link" href="/">
+          <Icon name="ArrowRight" class="rotate-180" size={16} />
+          volver al inicio
+        </a>
+        <h1 data-intro data-animate data-animate-delay="40">
+          lo tuyo,
+          <br />
+          se queda contigo.
+        </h1>
+        <p class="lead" data-intro data-animate="settle" data-animate-delay="120">
+          La aplicación FocusPhone no declara permiso de Internet. No tiene cuentas, publicidad ni telemetría.
+          Esta página explica la app y, por separado, lo que hace la web.
+        </p>
+        <h2>en la aplicación</h2>
+        <p>
+          Tus favoritos, preferencias y reglas se guardan en el almacenamiento privado de la aplicación, en el
+          dispositivo. Los datos sensibles —como etiquetas personalizadas, carpetas, perfiles y horarios— se
+          cifran con AES-256/GCM a través del almacén de claves de Android.
+        </p>
+        <p>
+          Las contraseñas de detox y horarios no se guardan como texto: se conserva un resumen criptográfico
+          con sal. Las notificaciones del panel se mantienen en memoria, sin escribir su contenido en disco.
+        </p>
+        <h2 id="permisos">permisos que tú decides</h2>
+        <h3>aplicaciones instaladas</h3>
+        <p>
+          FocusPhone consulta la lista de aplicaciones para mostrarlas en el cajón y permitirte elegir
+          favoritas. La desinstalación de una app siempre pasa por el diálogo de confirmación de Android.
+        </p>
+        <h3>servicio de accesibilidad · opcional</h3>
+        <p>
+          Permite detectar la aplicación en primer plano, aplicar bloqueos a aperturas que no pasan por el
+          launcher, contabilizar el tiempo para los límites diarios y abrir el panel del sistema con un gesto.
+          No lee el contenido de tus pantallas, escribe mensajes ni pulsa botones por ti.
+        </p>
+        <h3>acceso a notificaciones · opcional</h3>
+        <p>
+          Permite mostrar y descartar notificaciones en el panel lateral. No se almacenan en disco ni se
+          envían a servidores.
+        </p>
+        <h2>sin copias de seguridad</h2>
+        <p>
+          Los datos de la app están excluidos de las copias de seguridad y de la transferencia entre
+          dispositivos. Al reinstalar o cambiar de móvil tendrás que elegir de nuevo tus favoritos y
+          configurar tus preferencias.
+        </p>
+        <h2>los bloqueos son un compromiso personal</h2>
+        <p>
+          FocusPhone no es un administrador del dispositivo. No impide su propia desinstalación, el cambio de
+          launcher ni el acceso a los ajustes del sistema.
+        </p>
+        <h2>en esta web</h2>
+        <p>
+          Esta versión de la web no incluye cookies de seguimiento, herramientas de analítica, píxeles
+          publicitarios ni almacenamiento de mensajes. Las fuentes, imágenes y bibliotecas se sirven como
+          recursos propios. Las preferencias de la demostración no se guardan al cerrar la página.
+        </p>
+        <p>
+          Como en cualquier web, el proveedor de alojamiento puede procesar datos técnicos de las solicitudes,
+          como la dirección IP. Su tratamiento dependerá del alojamiento elegido al publicar el sitio.
+        </p>
+        <p>
+          Los enlaces a GitHub abren un servicio externo que aplica su{' '}
+          <a href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement">
+            propia política de privacidad
+          </a>
+          . Cuando el canal público esté disponible, el formulario de participación preparará un borrador de
+          consulta en GitHub: al pulsar «preparar consulta en GitHub», el tema y el mensaje viajan a ese
+          servicio como parte de la URL, que puede quedar en tu historial. Esta web no guarda el mensaje.
+          Necesitas una cuenta de GitHub y confirmar allí su publicación; las consultas publicadas son
+          públicas. No incluyas información personal.
+        </p>
+        <p>
+          Si el canal público no está disponible, el formulario solo prepara un texto para copiar. Los
+          mensajes largos también se copian manualmente para evitar enviarlos dentro de una URL extensa.
+          Copiar requiere una acción explícita y no publica el mensaje.
+        </p>
+        <h2>puedes comprobarlo</h2>
+        <p>
+          {site.publicProject ? (
+            <span>
+              El <a href={site.repository}>código fuente de FocusPhone</a> está disponible bajo su licencia no
+              comercial. La{' '}
+              <a href={`${site.repository}/blob/main/documentation/es/usuarios/11-privacidad-y-permisos.md`}>
+                documentación de privacidad y permisos
+              </a>{' '}
+              detalla su implementación.
+            </span>
+          ) : (
+            <span>
+              El acceso público al código todavía no está disponible. Consulta el{' '}
+              <a href={site.repository}>estado del proyecto</a> y su{' '}
+              <a href="/downloads/FOCUSPHONE-LICENSE.txt">licencia no comercial</a>.
+            </span>
+          )}
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>

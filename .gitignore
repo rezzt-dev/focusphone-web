@@ -1,0 +1,23 @@
+# internal documentation and agent skills (not present in every clone)
+.docs/
+
+# dependencies and build output
+node_modules/
+dist/
+.astro/
+
+# local environment
+.env
+.env.*
+!.env.example
+
+# test artifacts
+playwright-report/
+test-results/
+
+# os and editor noise
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/

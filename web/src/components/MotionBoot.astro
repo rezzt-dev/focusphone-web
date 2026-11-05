@@ -1,0 +1,41 @@
+---
+/**
+ * Runs before the first paint, so it is inline and tiny. It only sets state on <html>; the
+ * choreography itself lives in `src/scripts/animations/`.
+ *
+ * - `data-motion="intro"` lets CSS hold the load choreography's initial state, avoiding a flash
+ *   of final content before the deferred module starts. Without JavaScript it is never set; if
+ *   the module never runs, a CSS failsafe reveals everything after `--motion-failsafe`.
+ * - Anchors, history restoration and arrivals through a view transition skip the choreography:
+ *   the page is already oriented, or the transition is its entrance.
+ * - `pagereveal` must be registered before first render to type the incoming view transition:
+ *   returning to the home page plays the story backwards.
+ */
+---
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const navigation = performance.getEntriesByType('navigation')[0];
+    const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!calm && !location.hash && navigation?.type !== 'back_forward') root.dataset.motion = 'intro';
+
+    addEventListener('pagereveal', (event) => {
+      const transition = event.viewTransition;
+      if (!transition) return;
+      if (root.dataset.motion === 'intro') delete root.dataset.motion;
+      const activation = window.navigation?.activation;
+      const from = activation?.from?.url ?? document.referrer;
+      let previous = '';
+      try {
+        previous = from ? new URL(from).pathname : '';
+      } catch {}
+      const traversedBack =
+        activation?.navigationType === 'traverse' &&
+        activation.from &&
+        activation.entry.index < activation.from.index;
+      if (traversedBack || (location.pathname === '/' && previous && previous !== '/'))
+        transition.types?.add('back');
+    });
+  })();
+</script>

@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Base title="Esta página no está aquí — FocusPhone" noindex>
+  <Header />
+  <main id="contenido" class="document section-light">
+    <div class="container">
+      <div class="document-inner">
+        <p class="mb-6 font-mono text-xs">404</p>
+        <h1 data-intro data-animate data-animate-delay="40">
+          por aquí,
+          <br />
+          solo hay calma.
+        </h1>
+        <p class="lead" data-intro data-animate="settle" data-animate-delay="120">
+          La página que buscas no existe o ha cambiado de lugar. Tu nuevo inicio sigue aquí.
+        </p>
+        <a class="button" href="/">
+          volver a focusphone <Icon name="ArrowUpRight" size={18} />
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>

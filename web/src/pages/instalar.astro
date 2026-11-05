@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Instalar FocusPhone en Android — guía paso a paso"
+  description="Cómo instalar el APK de FocusPhone, elegirlo como launcher predeterminado y configurar tus primeras aplicaciones favoritas en Android 7.0 o posterior."
+>
+  <Header />
+  <main id="contenido" class="document section-light">
+    <div class="container">
+      <div class="document-inner">
+        <a class="back-link" href="/">
+          <Icon name="ArrowRight" class="rotate-180" size={16} />
+          volver al inicio
+        </a>
+        <h1 data-intro data-animate data-animate-delay="40">
+          tu nuevo inicio.
+          <br />
+          paso a paso.
+        </h1>
+        <p class="lead" data-intro data-animate="settle" data-animate-delay="120">
+          Necesitas un móvil con Android 7.0 o posterior. No necesitas root, una cuenta ni cambiar tus
+          aplicaciones.
+        </p>
+        <div class="notice" id="disponibilidad">
+          <p>
+            <strong>FocusPhone está en fase alpha (v{site.version}).</strong> Es una versión en desarrollo.
+            {site.publicProject
+              ? 'Consulta las notas y los APK disponibles en GitHub antes de instalarla.'
+              : 'La descarga pública del APK todavía no está disponible. Publicaremos aquí su acceso cuando esté listo.'}{' '}
+            Aún no está en Google Play.
+          </p>
+        </div>
+        <h2>1. consigue el APK</h2>
+        <p>
+          {site.publicProject
+            ? 'Abre Releases del repositorio oficial y busca el archivo .apk entre los archivos adjuntos de la versión.'
+            : 'Espera a que publiquemos un APK oficial. Esta guía explica los pasos para cuando esté disponible; actualmente no ofrece una descarga.'}
+        </p>
+        <a
+          class="button"
+          href={site.publicProject ? site.releases : site.repository}
+          data-conversion={site.publicProject ? 'releases' : 'project'}
+          data-location="install"
+        >
+          <Icon name="Download" size={18} />
+          {site.publicProject ? 'consultar descargas oficiales' : 'estado del proyecto'}
+          <Icon name="ArrowUpRight" size={17} />
+        </a>
+        <h2>2. instala la aplicación</h2>
+        <p>
+          Abre el APK descargado. Android puede pedirte que permitas instalar aplicaciones desde el navegador
+          o gestor de archivos que estás utilizando. Concede ese permiso a esa fuente, vuelve al archivo y
+          confirma la instalación.
+        </p>
+        <p>
+          Cuando termines, puedes volver a desactivar el permiso para instalar desde esa fuente en los ajustes
+          de Android.
+        </p>
+        <h2>3. elige tu pantalla de inicio</h2>
+        <p>
+          Abre FocusPhone y sigue la bienvenida. Cuando te lo proponga, selecciona FocusPhone como aplicación
+          de inicio predeterminada. También puedes hacerlo en{' '}
+          <strong>
+            ajustes de Android → aplicaciones → aplicaciones predeterminadas → aplicación de inicio
+          </strong>
+          . El nombre exacto depende del fabricante.
+        </p>
+        <h2>4. hazlo tuyo</h2>
+        <p>
+          Elige hasta diez aplicaciones favoritas. Una buena forma de empezar: teléfono, mensajes, cámara,
+          mapas, música y notas. Las demás siguen disponibles en el cajón de aplicaciones.
+        </p>
+        <p>
+          Después, explora los temas, los estilos de reloj, los widgets y los perfiles. Los servicios de
+          accesibilidad y notificaciones son opcionales: activa solo los que necesites.
+        </p>
+        <h2>¿quieres volver a tu launcher anterior?</h2>
+        <p>
+          Vuelve a los ajustes de aplicaciones predeterminadas de Android y elige tu pantalla de inicio
+          anterior. Cambiar de launcher no elimina tus fotos, archivos ni aplicaciones.
+        </p>
+        <h2>si necesitas una mano</h2>
+        <p>
+          Consulta la <a href={site.documentation}>documentación del proyecto</a> o{' '}
+          <a href={site.issues}>
+            {site.publicProject ? 'abre una consulta en GitHub' : 'prepara tu consulta'}
+          </a>
+          . Para comunicar un error, incluye tu modelo de teléfono, versión de Android y los pasos que lo
+          provocaron.
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
