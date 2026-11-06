@@ -21,3 +21,11 @@ Thumbs.db
 *.log
 .idea/
 .vscode/
+
+# Share repository management instructions; keep other internal docs local.
+!/.docs/
+/.docs/*
+!/.docs/manager.md
+!/.docs/repo-audit-and-fix.md
+!/.docs/-github-guides/
+!/.docs/-github-guides/*.md

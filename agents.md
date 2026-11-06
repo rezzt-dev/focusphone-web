@@ -1,57 +1,145 @@
-# FocusPhone Web — Agent Guide
+# FOCUSPHONE-WEB: REPOSITORY GUIDE
 
-> Guide for AI agents (and humans) working on the FocusPhone landing page.
-> [`claude.md`](claude.md) carries only the commit / PR / merge / release
-> conventions; everything else lives here. The app itself is a separate
+static marketing website for the focusphone android launcher. this guide covers the repository; nested agent instructions apply within their own folders.
+
+## PROJECT OVERVIEW
+
+| property | verified value |
+| --- | --- |
+| repository | `rezzt-dev/focusphone-web` |
+| active source | `web/` |
+| development base for this change | `main` |
+| remote default branch | `main` |
+| version source | `web/package.json`: `1.0.0` |
+| continuous integration | no tracked github actions workflows |
+
+## TECHNOLOGY STACK
+
+- `web/package.json`: `astro` ^7.4.7, `tailwindcss` ^4.3.4, `typescript` ^6.0.3
+
+## PROJECT STRUCTURE
+
+- `changelog.md`
+- `license.md`
+- `readme.md`
+- `security.md`
+- `web/`
+
+management documentation lives in `.docs/manager.md`, `.docs/-github-guides/` and `.docs/repo-audit-and-fix.md`. keep this file and `claude.md` consistent.
+
+## BUILD, RUN AND TEST COMMANDS
+
+from `web/`, the available package scripts are:
+
+| command | implementation |
+| --- | --- |
+| `npm run dev` | `node node_modules/astro/bin/astro.mjs dev --host 0.0.0.0` |
+| `npm run build` | `node node_modules/astro/bin/astro.mjs check && node node_modules/astro/bin/astro.mjs build` |
+| `npm run preview` | `node node_modules/astro/bin/astro.mjs preview --host 0.0.0.0` |
+| `npm run check` | `node node_modules/astro/bin/astro.mjs check` |
+| `npm run prepare:assets` | `node scripts/generate-social.mjs` |
+| `npm run format` | `node node_modules/prettier/bin/prettier.cjs --write src tests scripts astro.config.mjs playwright.config.ts README.md PRODUCT.md DESIGN.md MOTION.md` |
+| `npm run format:check` | `node node_modules/prettier/bin/prettier.cjs --check src tests scripts astro.config.mjs playwright.config.ts README.md PRODUCT.md DESIGN.md MOTION.md` |
+| `npm run install:browsers` | `node node_modules/@playwright/test/cli.js install chromium firefox webkit` |
+| `npm run test:e2e` | `node node_modules/@playwright/test/cli.js test` |
+| `npm run test:seo` | `node scripts/verify-seo.mjs` |
+| `npm run build:production` | `node scripts/build-production.mjs` |
+| `npm run test:links` | `node scripts/verify-public-links.mjs` |
+| `npm run test:budgets` | `node scripts/verify-budgets.mjs` |
+
+for application changes, run these checks from `web/`:
+
+```bash
+npm run check
+npm run build
+```
+
+## OPTIONAL LOCAL DOCUMENTATION
+
+the repository-management subset of `.docs/` is shared. `.docs/project-docs/` and local design skills may be absent in a fresh clone. preserve their references as optional context; verify the current source and ask for a missing design decision only when it blocks the requested change. generated output is `web/dist/` and does not need to exist before building.
+
+## CODE STYLE AND ARCHITECTURAL DECISIONS
+
+preserve direct-node scripts required by the filesystem, local-only contact draft behaviour and performance budgets; derive public destinations from site configuration. follow the existing formatter and naming of the changed module. verify manifest versions when dependencies change.
+
+## TESTING STRATEGY
+
+documentation-only changes require `git diff --check`, existing-path checks and a review of the staged file list. run module checks for application changes, with disposable data. report unavailable tooling and failed checks; never claim a check passed without running it.
+
+## SECURITY AND DEPLOYMENT
+
+keep credentials, local configuration, signing material and user data out of commits. do not print secret values while auditing. inspect configuration names and code references instead.
+
+existing legal and community files: `license.md`, `security.md`. when changing dependencies, permissions, storage or network services, review those files against the implementation. record missing policies as audit work; do not invent licence terms or ownership decisions.
+
+deployment, signing, store publication, migrations against hosted databases and repository settings require their own explicit request. this documentation task prepares management instructions and pull requests.
+
+## COMMON TASKS
+
+1. read the relevant module and its nearest agent instructions
+2. inspect the working tree and choose the smallest change that solves the request
+3. update the affected documentation and changelog with evidence from the diff
+4. run checks appropriate to the changed module and report their actual results
+5. for git operations, follow the manager and the digest below
+
+## EXISTING PROJECT CONVENTIONS
+
+the following project-specific context is retained from the previous guide. paths are relative to the active module when stated. for git operations, the manager and final digest supersede previous workflow examples.
+
+## FOCUSPHONE WEB — AGENT GUIDE
+
+> guide for ai agents (and humans) working on the focusphone landing page.
+> [`claude.md`](claude.md) carries only the commit / pr / merge / release
+> conventions; everything else lives here. the app itself is a separate
 > repository: <https://github.com/rezzt-dev/focusphone-app>.
 
 ---
 
-## Project Overview
+## PROJECT OVERVIEW
 
-**FocusPhone Web** is the Spanish-language, fully static landing page for
-FocusPhone, a minimalist Android launcher (text-only home screen, focus
-profiles, a conscious pause before opening apps). It is independent from the
-Android app: no backend, no accounts, no analytics, no cookies.
+**focusphone web** is the spanish-language, fully static landing page for
+focusphone, a minimalist android launcher (text-only home screen, focus
+profiles, a conscious pause before opening apps). it is independent from the
+android app: no backend, no accounts, no analytics, no cookies.
 
-- **Current app version shown:** `1.4` beta (`v1.4-beta`) (source of truth: `web/src/data/site.ts`).
-- **Canonical origin:** `https://focusphone.rezzt.dev` (default, overridable via `PUBLIC_SITE_URL`).
-- **Language of the site:** Spanish, lowercase headings in the app's calm voice, sentence-case body copy.
-- **Status:** not deployed from this repository. No Google Play listing, and no public APK yet.
+- **current app version shown:** `1.4` beta (`v1.4-beta`) (source of truth: `web/src/data/site.ts`).
+- **canonical origin:** `https://focusphone.rezzt.dev` (default, overridable via `PUBLIC_SITE_URL`).
+- **language of the site:** spanish, lowercase headings in the app's calm voice, sentence-case body copy.
+- **status:** not deployed from this repository. no google play listing, and no public apk yet.
 
-### Hard product rules
+### HARD PRODUCT RULES
 
-- No fabricated social proof (testimonials, ratings, download counts, countdowns).
-- Phone mockups are **illustrative HTML/CSS**, never presented as official screenshots.
-- Never promise a download that does not exist. With no `PUBLIC_PROJECT_URL`, CTAs go to `/proyecto/` and `/instalar/#disponibilidad`.
-- Never link to a public destination that returns 404 or requires authentication.
-- Never add cookies, pixels, SDKs, third-party requests or measurement without first updating `/privacidad/` and `security.md`.
-- Everything must be readable and usable without JavaScript.
+- no fabricated social proof (testimonials, ratings, download counts, countdowns).
+- phone mockups are **illustrative html/css**, never presented as official screenshots.
+- never promise a download that does not exist. with no `PUBLIC_PROJECT_URL`, ctas go to `/proyecto/` and `/instalar/#disponibilidad`.
+- never link to a public destination that returns 404 or requires authentication.
+- never add cookies, pixels, sdks, third-party requests or measurement without first updating `/privacidad/` and `security.md`.
+- everything must be readable and usable without javascript.
 
 ---
 
-## Technology Stack
+## TECHNOLOGY STACK
 
 | area | choice |
 |---|---|
-| framework | Astro 7, static output, `trailingSlash: 'always'` |
-| styling | Tailwind CSS 4 (`@tailwindcss/vite`) + semantic OKLCH tokens in `src/styles/global.css` |
-| language | TypeScript 6 (strict `astro check`) |
-| motion | Anime.js 4 (WAAPI for entrances and scroll, its own engine for breathing) |
+| framework | astro 7, static output, `trailingSlash: 'always'` |
+| styling | tailwind css 4 (`@tailwindcss/vite`) + semantic oklch tokens in `src/styles/global.css` |
+| language | typescript 6 (strict `astro check`) |
+| motion | anime.js 4 (waapi for entrances and scroll, its own engine for breathing) |
 | icons | `@lucide/astro`, tree-shaken through `src/components/Icon.astro` |
-| fonts | Fontsource Poppins 400/500/600 and JetBrains Mono 400, self-hosted Latin WOFF2 |
-| tests | Playwright (Chromium, Firefox, WebKit) + `@axe-core/playwright` |
-| formatting | Prettier + `prettier-plugin-astro` |
-| runtime | Node.js `>=22.23.4`, npm |
+| fonts | fontsource poppins 400/500/600 and jetbrains mono 400, self-hosted latin woff2 |
+| tests | playwright (chromium, firefox, webkit) + `@axe-core/playwright` |
+| formatting | prettier + `prettier-plugin-astro` |
+| runtime | node.js `>=22.23.4`, npm |
 
 ---
 
-## Project Structure
+## PROJECT STRUCTURE
 
 ```text
 focusphone-web/
 ├── readme.md · security.md · license.md · agents.md · claude.md
-├── .docs/                      # gitignored: project docs, guidelines, agent skills
+
 │   ├── project-docs/           # product-doc, design-doc, motion-doc, audit-doc
 │   ├── commit-guidelines.md
 │   └── pr-merge-release-guidelines.md
@@ -73,15 +161,15 @@ focusphone-web/
     └── tests/                  # landing.spec.ts + pages/Landing.ts (page object)
 ```
 
-> `.docs/` is gitignored and may be absent. The project docs under
+
 > `.docs/project-docs/` are the reference for product, design, motion and audit decisions.
-> Read the relevant one **before** changing visuals or motion.
+> read the relevant one **before** changing visuals or motion.
 
 ---
 
-## Build Commands
+## BUILD COMMANDS
 
-All commands run from `web/`.
+all commands run from `web/`.
 
 ```bash
 npm ci                    # install exactly what package-lock.json says
@@ -100,410 +188,160 @@ npm run build:production  # config + build + seo + budgets + links (the release 
 npm run prepare:assets    # regenerate public/images/social.{png,svg}
 ```
 
-### Build Configuration Notes
+### BUILD CONFIGURATION NOTES
 
-- `.npmrc` disables executable symlinks and every script calls Node directly, because this repository lives on **exFAT**. Do not "simplify" the scripts back to `astro ...` binaries.
-- `PUBLIC_SITE_URL` must be an HTTPS origin with no credentials, path, query or fragment; `build:production` enforces this.
-- `PUBLIC_PROJECT_URL` must be a `https://github.com/<owner>/<repo>` URL. Set it **only** when the repository, docs, issues and a downloadable APK are public; `build:production` verifies that and fails otherwise.
-- The `format` / `format:check` scripts list `README.md PRODUCT.md DESIGN.md MOTION.md` inside `web/`; those files live elsewhere now (`../readme.md`, `../.docs/project-docs/`). If Prettier complains about missing paths, update the scripts rather than recreating the files.
+- `.npmrc` disables executable symlinks and every script calls node directly, because this repository lives on **exfat**. do not "simplify" the scripts back to `astro ...` binaries.
+- `PUBLIC_SITE_URL` must be an https origin with no credentials, path, query or fragment; `build:production` enforces this.
+- `PUBLIC_PROJECT_URL` must be a `https://github.com/<owner>/<repo>` url. set it **only** when the repository, docs, issues and a downloadable apk are public; `build:production` verifies that and fails otherwise.
+- the `format` / `format:check` scripts list `README.md PRODUCT.md DESIGN.md MOTION.md` inside `web/`; those files live elsewhere now (`../readme.md`, `../.docs/project-docs/`). if prettier complains about missing paths, update the scripts rather than recreating the files.
 
 ---
 
-## Code Style Guidelines
+## CODE STYLE GUIDELINES
 
-### Language & Tone
+### LANGUAGE & TONE
 
-- **Site copy:** Spanish. Headings in lowercase; body in sentence case. Calm, concrete, never urgent.
-- **Code, identifiers, comments, commit-adjacent docs:** follow the existing conventions of the file you touch.
-- Avoid marketing superlatives and unverifiable performance claims.
+- **site copy:** spanish. headings in lowercase; body in sentence case. calm, concrete, never urgent.
+- **code, identifiers, comments, commit-adjacent docs:** follow the existing conventions of the file you touch.
+- avoid marketing superlatives and unverifiable performance claims.
 
-### Formatting Conventions
+### FORMATTING CONVENTIONS
 
-- Prettier is the formatter (`.prettierrc.json`); run `npm run format` before committing.
-- Semantic HTML first: `button` for actions, `a` for navigation, native `details` for the FAQ.
-- Colors, spacing and motion come from CSS tokens (`global.css`, `motion.css`), never hard-coded in components.
+- prettier is the formatter (`.prettierrc.json`); run `npm run format` before committing.
+- semantic html first: `button` for actions, `a` for navigation, native `details` for the faq.
+- colors, spacing and motion come from css tokens (`global.css`, `motion.css`), never hard-coded in components.
 
-### UI Patterns
+### UI PATTERNS
 
-- **Container:** max width 1240px, gutters 56px (desktop) / 22px (mobile). Breakpoints: 1150, 900 and 640px. Must hold at 320px.
-- **Phone mockup:** always the shared `Phone.astro`; it is marked illustrative and its buttons show example messages only.
-- **Icons:** only through `Icon.astro` (tree-shaken Lucide).
-- **Interactive widgets:** tabs implement the WAI-ARIA keyboard pattern (arrows, Home, End); toggles expose `aria-pressed`.
+- **container:** max width 1240px, gutters 56px (desktop) / 22px (mobile). breakpoints: 1150, 900 and 640px. must hold at 320px.
+- **phone mockup:** always the shared `Phone.astro`; it is marked illustrative and its buttons show example messages only.
+- **icons:** only through `Icon.astro` (tree-shaken lucide).
+- **interactive widgets:** tabs implement the wai-aria keyboard pattern (arrows, home, end); toggles expose `aria-pressed`.
 
-### Motion
+### MOTION
 
-- Animations are declarative via `data-*` attributes (`data-animate`, `data-intro`, `data-animate-delay`, …) handled by `src/scripts/animations/`. Variants: `fade-up` (default), `settle`, `rise`, `product`, `fade`, `scale`, `clip`.
-- Tokens live in `src/styles/motion.css` and are the **only** source of timings and easings.
+- animations are declarative via `data-*` attributes (`data-animate`, `data-intro`, `data-animate-delay`, …) handled by `src/scripts/animations/`. variants: `fade-up` (default), `settle`, `rise`, `product`, `fade`, `scale`, `clip`.
+- tokens live in `src/styles/motion.css` and are the **only** source of timings and easings.
 - `MotionBoot.astro` decides before first paint whether the load choreography plays.
-- Must respect `prefers-reduced-motion`. No perpetual loops, scroll hijacking or custom cursor.
-- Full direction: `.docs/project-docs/motion-doc.md`.
+- must respect `prefers-reduced-motion`. no perpetual loops, scroll hijacking or custom cursor.
+- full direction: `.docs/project-docs/motion-doc.md`.
 
 ---
 
-## Testing Strategy
+## TESTING STRATEGY
 
-- Playwright specs in `web/tests/` use a page object (`tests/pages/Landing.ts`). Prefer role- and name-based locators over CSS selectors.
-- Covered today: themes and clocks, phone interaction, profile tabs with keyboard, breathing with cancel, mobile and tablet menu, form validation and GitHub draft preparation, FAQ, pages and internal links, no horizontal overflow, axe-core on desktop and mobile.
-- New interactive behavior needs a spec. Visual-only changes need a manual check at 320, 640, 900 and 1240px.
-- Automated accessibility checks complement manual review; they are not a certification.
-- Before declaring a task done: `npm run check`, `npm run format:check`, `npm run build:production` and `npm run test:e2e`. Report any failure verbatim — do not claim a green run you did not see.
-
----
-
-## Key Decisions
-
-### 1. Static, no backend
-
-The contact form only **prepares a local draft** to copy or open on GitHub (only if a public repo is configured). Messages under 20 useful characters are rejected; if the GitHub URL exceeds 7,000 characters the text is offered for copy separately; if clipboard access is denied the text is selected for manual copying.
-
-### 2. Honest availability
-
-`site.ts` derives `repository`, `releases`, `documentation` and `issues` from `PUBLIC_PROJECT_URL`. Without it every link resolves to an internal page. Never hard-code a GitHub URL elsewhere.
-
-### 3. Local conversion event only
-
-Marked CTAs dispatch the browser event `focusphone:conversion` with `detail.action` (`releases`, `repository`, `availability`, `project`) and `detail.location`. Nothing is stored or sent. A click is not an install.
-
-### 4. Performance budgets are build gates
-
-JS ≤ 40 KiB gzip and CSS ≤ 15 KiB gzip across all pages. The breathing script ships only on the landing. A new dependency or script must fit the budget.
-
-### 5. Self-hosted everything
-
-No external fonts, images, scripts or analytics. Social cards (`public/images/social.png|svg`) are generated by `scripts/generate-social.mjs`.
-
-### 6. Cross-document view transitions
-
-Native page transitions keep the header and reverse direction when returning home. Don't replace them with a client-side router.
+- playwright specs in `web/tests/` use a page object (`tests/pages/Landing.ts`). prefer role- and name-based locators over css selectors.
+- covered today: themes and clocks, phone interaction, profile tabs with keyboard, breathing with cancel, mobile and tablet menu, form validation and github draft preparation, faq, pages and internal links, no horizontal overflow, axe-core on desktop and mobile.
+- new interactive behavior needs a spec. visual-only changes need a manual check at 320, 640, 900 and 1240px.
+- automated accessibility checks complement manual review; they are not a certification.
+- before declaring a task done: `npm run check`, `npm run format:check`, `npm run build:production` and `npm run test:e2e`. report any failure verbatim — do not claim a green run you did not see.
 
 ---
 
-## Security Considerations
+## KEY DECISIONS
 
-- Never insert visitor-provided text with `innerHTML`; use `textContent` and `URL` / `URLSearchParams`.
-- Never version secrets. `.env` and `.env.*` are gitignored (only `.env.example` is tracked).
-- Browser baseline: Chrome 111+, Safari 16.4+, Firefox 128+.
-- Hosting headers live in `web/public/_headers` and `web/deploy/nginx.conf`; keep both policies equivalent. Do not use a global rewrite to `index.html` (a missing route must return a real 404).
-- Vulnerability reporting policy: [`security.md`](security.md).
+### 1. STATIC, NO BACKEND
+
+the contact form only **prepares a local draft** to copy or open on github (only if a public repo is configured). messages under 20 useful characters are rejected; if the github url exceeds 7,000 characters the text is offered for copy separately; if clipboard access is denied the text is selected for manual copying.
+
+### 2. HONEST AVAILABILITY
+
+`site.ts` derives `repository`, `releases`, `documentation` and `issues` from `PUBLIC_PROJECT_URL`. without it every link resolves to an internal page. never hard-code a github url elsewhere.
+
+### 3. LOCAL CONVERSION EVENT ONLY
+
+marked ctas dispatch the browser event `focusphone:conversion` with `detail.action` (`releases`, `repository`, `availability`, `project`) and `detail.location`. nothing is stored or sent. a click is not an install.
+
+### 4. PERFORMANCE BUDGETS ARE BUILD GATES
+
+js ≤ 40 kib gzip and css ≤ 15 kib gzip across all pages. the breathing script ships only on the landing. a new dependency or script must fit the budget.
+
+### 5. SELF-HOSTED EVERYTHING
+
+no external fonts, images, scripts or analytics. social cards (`public/images/social.png|svg`) are generated by `scripts/generate-social.mjs`.
+
+### 6. CROSS-DOCUMENT VIEW TRANSITIONS
+
+native page transitions keep the header and reverse direction when returning home. don't replace them with a client-side router.
 
 ---
 
-## Common Tasks for Agents
+## SECURITY CONSIDERATIONS
 
-### Updating the app version
+- never insert visitor-provided text with `innerHTML`; use `textContent` and `URL` / `URLSearchParams`.
+- never version secrets. `.env` and `.env.*` are gitignored (only `.env.example` is tracked).
+- browser baseline: chrome 111+, safari 16.4+, firefox 128+.
+- hosting headers live in `web/public/_headers` and `web/deploy/nginx.conf`; keep both policies equivalent. do not use a global rewrite to `index.html` (a missing route must return a real 404).
+- vulnerability reporting policy: [`security.md`](security.md).
 
-1. Edit `version` and the FAQ strings in `web/src/data/site.ts`.
-2. Check the "beta" copy (`site.stage`) in `index.astro`, `instalar.astro` and structured data.
+---
+
+## COMMON TASKS FOR AGENTS
+
+### UPDATING THE APP VERSION
+
+1. edit `version` and the faq strings in `web/src/data/site.ts`.
+2. check the "beta" copy (`site.stage`) in `index.astro`, `instalar.astro` and structured data.
 3. `npm run prepare:assets` to regenerate the social card.
 4. `npm run build:production`.
 
-### Adding a page
+### ADDING A PAGE
 
-1. Create `src/pages/<name>.astro` using `Base`, `Header` and `Footer`; give it a unique title and description.
-2. Link it from header/footer consistently and add it to the Playwright internal-link coverage.
-3. Confirm sitemap and canonical via `npm run test:seo`.
+1. create `src/pages/<name>.astro` using `Base`, `Header` and `Footer`; give it a unique title and description.
+2. link it from header/footer consistently and add it to the playwright internal-link coverage.
+3. confirm sitemap and canonical via `npm run test:seo`.
 
-### Adding a landing section
+### ADDING A LANDING SECTION
 
-1. Read the matching section in `.docs/project-docs/design-doc.md` (purpose, hierarchy, interactions, transition).
-2. Use semantic headings and `data-animate` variants; keep default HTML visible without JS.
-3. Add a spec if the section is interactive; run axe through `npm run test:e2e`.
+1. read the matching section in `.docs/project-docs/design-doc.md` (purpose, hierarchy, interactions, transition).
+2. use semantic headings and `data-animate` variants; keep default html visible without js.
+3. add a spec if the section is interactive; run axe through `npm run test:e2e`.
 
-### Publishing the project links
+### PUBLISHING THE PROJECT LINKS
 
-Only when repo, docs, issues and APK are public: set `PUBLIC_PROJECT_URL`, run `npm run build:production`, and update `/privacidad/` if hosting or measurement changed.
-
----
-
-## Deployment Notes
-
-- Output is `web/dist/`, designed for the **root** of the domain on static hosting with `404.html` as the error page and trailing-slash routes.
-- `deploy/nginx.conf` expects `dist/` copied to `/srv/focusphone` behind the platform's HTTPS endpoint.
-- Nothing has been deployed or TLS-configured from this repository. Do not claim otherwise.
-- Pre-publication checks on the real domain: HTTP→HTTPS and canonical-host redirects, a 404 on a missing route, compression, caching, canonical, social card; Safari iOS and Chrome Android on real devices; keyboard and screen reader; 200 % zoom and 400 % reflow; field LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 at p75 once there is traffic.
+only when repo, docs, issues and apk are public: set `PUBLIC_PROJECT_URL`, run `npm run build:production`, and update `/privacidad/` if hosting or measurement changed.
 
 ---
 
-## Commit, PR, Merge & Release Guidelines
+## DEPLOYMENT NOTES
 
-> `.docs/` is gitignored (not present in every clone or agent environment), so the
-> full content of `.docs/commit-guidelines.md` and `.docs/pr-merge-release-guidelines.md`
-> is duplicated below verbatim. Both `agents.md` and `claude.md` carry the same copy so
-> any agent has it regardless of which file it reads first. If `.docs/` is present
-> locally, treat it as the source of truth and keep this copy in sync with it.
->
-> This repository does not have a `changelog.md` yet. Until one exists, PR and
-> release text is written directly in the same category format described below.
-
-### `.docs/commit-guidelines.md`
-
-# COMMIT GUIDELINES
-
-> instrucciones para cualquier agente de ia (o persona) que redacte el titulo
-> y la descripcion de un commit de git en este repositorio. se aplica siempre
-> que se pida algo equivalente a:
->
-> *"sacame el titulo y la descripcion para el commit con los cambios
-> realizados desde el ultimo commit. fijate en los anteriores commits para
-> que tengan el mismo formato."*
->
-> y, de forma general, **cada vez que se vaya a crear un commit en este
-> repositorio**, se haya pedido explicitamente o no.
+- output is `web/dist/`, designed for the **root** of the domain on static hosting with `404.html` as the error page and trailing-slash routes.
+- `deploy/nginx.conf` expects `dist/` copied to `/srv/focusphone` behind the platform's https endpoint.
+- nothing has been deployed or tls-configured from this repository. do not claim otherwise.
+- pre-publication checks on the real domain: http→https and canonical-host redirects, a 404 on a missing route, compression, caching, canonical, social card; safari ios and chrome android on real devices; keyboard and screen reader; 200 % zoom and 400 % reflow; field lcp ≤ 2.5 s, inp ≤ 200 ms, cls ≤ 0.1 at p75 once there is traffic.
 
 ---
 
-#### FORMATO FIJO DEL TITULO
-
-```
-<prefijo> | <resumen corto en imperativo>
-```
-
-el separador es siempre espacio, barra vertical, espacio: ` | `. el
-`<prefijo>` es siempre una de estas cinco palabras, en minusculas, y nunca
-se combinan ni se inventan otras nuevas:
-
-| prefijo | cuando usarlo |
-|---|---|
-| **update** | trabajo normal hacia adelante: se añade o mejora una funcionalidad, contenido o documento existente. es el prefijo por defecto. |
-| **fix** | se corrige un error o comportamiento incorrecto detectado durante el desarrollo, sin urgencia de publicacion inmediata. |
-| **hotfix** | se corrige algo urgente que afecta a una version ya publicada o a un bloqueo critico. debe usarse solo cuando la correccion es realmente urgente. |
-| **changes** | cambios estructurales o no funcionales: reorganizar carpetas, renombrar ficheros, tocar configuracion o tooling, dependencias. no anade funcionalidad ni corrige un bug. |
-| **changelog** | el unico proposito del commit es editar `changelog.md` (por ejemplo, al cerrar una version). |
-
-ejemplos de titulos correctos:
-
-```
-update | añadir vista previa de mapeo de columnas al asistente de importación csv
-fix | detección de duplicados fallando en filas con importes negativos
-hotfix | fallo al iniciar cuando falta el archivo de perfil de importación
-changes | reorganizar la documentación en la subcarpeta project-context
-changelog | cerrar la sección de changelog para la versión mvp fase 0
-```
-
----
-
-#### FORMATO DE LA DESCRIPCION (CUERPO)
-
-- el cuerpo es siempre **una lista de markdown no numerada**: cada item empieza
-  por `-`. nunca se usan listas numeradas ni parrafos sueltos.
-- cada item es un bloque logico en imperativo, escrito como **una sola linea
-  continua**, sin saltos de linea internos: no son esteticos ni utiles, deja
-  que el cliente de git lo ajuste. no se dejan lineas en blanco entre items.
-- usa markdown dentro de cada item: nombres de ficheros, rutas, comandos e
-  identificadores siempre entre backticks.
-- explica el que y el por que, no el detalle linea a linea.
-- cierra con una linea en blanco y la linea de atribucion que corresponda al
-  entorno.
-
----
-
-#### COMO PRESENTAR EL RESULTADO
-
-al responder con el titulo y la descripcion hay que usar **bloques de codigo
-separados**: uno para el titulo del commit y otro para el cuerpo del commit (mas
-otro para el fragmento del changelog). nunca se juntan el titulo y el cuerpo en
-el mismo bloque.
-
-### `.docs/pr-merge-release-guidelines.md`
-
-# PR, MERGE Y RELEASE GUIDELINES
-
-> instrucciones para cualquier agente de ia (o persona) que redacte el titulo
-> y la descripcion de una **pull request**, de un **commit de merge** o de una
-> **release de github** en este repositorio, de forma que su contenido lea
-> como una extension directa de `changelog.md` en lugar de un formato distinto
-> por cada canal. se aplica siempre que se pida algo equivalente a:
->
-> *"sacame el titulo y la descripcion para la pull request / el merge / la
-> release con los cambios de esta version. usa el mismo formato que
-> `changelog.md`."*
->
-> y, de forma general, **cada vez que se vaya a abrir una pull request, hacer
-> un merge o publicar una release en este repositorio**, se haya pedido
-> explicitamente o no.
-
-este documento asume conocido el formato de `changelog.md` (descrito en
-`agents.md` y `claude.md`, seccion "formato de las secciones de
-`changelog.md`") y el de los commits (`.docs/commit-guidelines.md`). no lo
-repite salvo lo estrictamente necesario.
-
----
-
-#### PRINCIPIO GENERAL
-
-pull requests, merges y releases **no inventan su propio formato**: reusan
-literalmente el contenido y las reglas de estilo de `changelog.md`.
-
-- **minusculas y sin acentos** en todo el contenido; los titulos/encabezados
-  van en mayusculas y sin acentos.
-- **categorias cerradas**, las mismas cinco de `changelog.md` y en el mismo
-  orden — nunca, cambios, corregido, eliminado, seguridad
-  (added / changed / fixed / removed / security) — omitiendo la que no tenga
-  items.
-- **una linea por item**, en imperativo, con nombres de ficheros, rutas,
-  comandos e identificadores entre backticks.
-- las fechas usan el formato `aaaa-mm-dd`.
-- las entradas `[online]` / `[offline]` de `changelog.md` (cambios que solo
-  afectan a una de las dos versiones de la app) se conservan tal cual en pr,
-  merge y release: no se separan ni se traducen a otro marcador.
-
-la fuente de verdad es siempre `changelog.md`: antes de redactar una pr, un
-merge o una release, la seccion `## SIN PUBLICAR / UNRELEASED` (o la version
-ya cerrada correspondiente) debe estar actualizada. el contenido de pr, merge
-y release se **extrae** de ahi, no se redacta desde cero ni en paralelo.
-
----
-
-#### 1. PULL REQUESTS
-
-hay dos tipos de pr en este repositorio y cada una tiene su propio formato de
-titulo; la descripcion es igual para las dos.
-
-##### 1.1 titulo
-
-**pr de trabajo normal** (una rama `feature/...` o `fix/...` contra
-`testing-branch`, o cualquier pr que no cierra una version): mismo formato
-que el titulo de un commit, definido en `.docs/commit-guidelines.md`:
-
-```
-<prefijo> | <resumen corto en imperativo>
-```
-
-usando el mismo prefijo (`update`, `fix`, `hotfix`, `changes`, `changelog`) y
-las mismas reglas — si la pr agrupa varios commits, el resumen describe el
-conjunto, no cada commit por separado.
-
-**pr de publicacion de version** (`testing-branch` → `release-branch` /
-`main`, cierra una version de `changelog.md`): sigue el patron ya usado en
-los merges anteriores del repositorio (`release version 1.6 - supabase cloud
-sync, onyx theme and task detail redesign`):
-
-```
-release version <x.y.z> - <resumen corto en imperativo>
-```
-
-el resumen corto resume las 2-3 entradas mas relevantes de la version, igual
-que en el ejemplo anterior.
-
-##### 1.2 descripcion
-
-la descripcion es el bloque `### CASTELLANO` + `### ENGLISH` de la seccion
-correspondiente de `changelog.md` (la version que cierra la pr, o el
-subconjunto de `## SIN PUBLICAR / UNRELEASED` que aporta esa pr), pegado tal
-cual, con sus encabezados `####` de categoria:
-
-```
-### CASTELLANO
-
-#### <categoria>
-- <cambio en una linea>
-
-### ENGLISH
-
-#### <category>
-- <same change, one line>
-```
-
-si la pr solo aporta una parte de `## SIN PUBLICAR / UNRELEASED` (por
-ejemplo, varias pr pequenas alimentan la misma version antes de cerrarla),
-la descripcion incluye solo los items que introduce esa pr, no la seccion
-entera.
-
-no se anaden parrafos sueltos, capturas de pantalla incrustadas como texto,
-ni resumenes adicionales fuera de la lista: si hace falta contexto extra (por
-ejemplo, capturas de pantalla de cambios visuales, ver `agents.md` seccion
-10), se anade **despues** de la lista, nunca sustituyendola.
-
----
-
-#### 2. COMMIT DE MERGE
-
-github genera el commit de merge a partir del titulo y la descripcion de la
-pr automaticamente (`Merge pull request #<n> from <rama>` como primera linea,
-seguido del titulo y cuerpo de la pr). por tanto:
-
-- si la pr cumple las secciones 1.1 y 1.2, el commit de merge ya cumple este
-  formato sin trabajo adicional.
-- usa siempre **"create a merge commit"** al fusionar (nunca squash ni
-  rebase): el historial de commits individuales, redactado segun
-  `.docs/commit-guidelines.md`, debe conservarse completo junto al resumen de
-  la pr en el commit de merge.
-- si el merge se hace manualmente por git (`git merge --no-ff`), el mensaje
-  del commit de merge se redacta a mano siguiendo el mismo titulo (seccion
-  1.1) y el mismo cuerpo (seccion 1.2) que llevaria la pr equivalente.
-
----
-
-#### 3. RELEASES DE GITHUB
-
-las releases de github son **en ingles unicamente** (no bilingues, a
-diferencia de `changelog.md` y de las pr): son la cara publica del proyecto
-de cara a usuarios que no necesariamente leen castellano.
-
-##### 3.1 titulo de la release
-
-```
-v<x.y.z> — <resumen corto en ingles, minusculas, sin acentos>
-```
-
-ejemplo (formato ya usado en `.docs/releases-docs/`):
-
-```
-v1.7 — 100% offline, reminders redesign & settings categories
-```
-
-##### 3.2 descripcion de la release
-
-el cuerpo reutiliza literalmente el bloque `### ENGLISH` de la version
-cerrada en `changelog.md`, con sus categorias en mayusculas y sin acentos,
-igual que en el changelog:
-
-```
-#### ADDED
-- <change in one line>
-
-#### CHANGED
-- <change in one line>
-
-#### FIXED
-- <change in one line>
-
-#### REMOVED
-- <change in one line>
-
-#### SECURITY
-- <change in one line>
-```
-
-se omite la categoria que no tenga items, igual que en `changelog.md`. no se
-reescribe el contenido en parrafos narrativos con negritas ni se reordenan
-las categorias: la release debe poder generarse copiando y pegando el bloque
-`### ENGLISH` de la version correspondiente.
-
-> nota: los releases anteriores a esta guia (incluidos los de
-> `.docs/releases-docs/release-1.7/`) usan un formato narrativo distinto
-> (parrafos con titulo en negrita en vez de las cinco categorias). son
-> historicos y no se reescriben con esta regla; a partir de esta guia, toda
-> release nueva usa el formato de categorias descrito arriba.
-
-##### 3.3 tag
-
-el tag de git asociado a la release es siempre `v<x.y.z>` (mismo numero de
-version que la cabecera de `changelog.md`, sin sufijos adicionales).
-
----
-
-#### FLUJO RESUMIDO
-
-1. durante el desarrollo, cada commit sigue `.docs/commit-guidelines.md` y
-   cada cambio relevante se anade a `## SIN PUBLICAR / UNRELEASED` en
-   `changelog.md` en su categoria correspondiente.
-2. cada pr (normal o de version) usa el titulo y la descripcion definidos en
-   la seccion 1, extraidos de `changelog.md`.
-3. al fusionar, se usa "create a merge commit" para que el commit de merge
-   herede el formato de la pr (seccion 2).
-4. al cerrar una version: se renombra `## SIN PUBLICAR / UNRELEASED` a
-   `## [x.y.z] - aaaa-mm-dd` en `changelog.md` (commit con prefijo
-   `changelog`), se abre la pr de publicacion de version (seccion 1.1), y al
-   fusionarla se crea la release de github (seccion 3) con el tag `v<x.y.z>`.
-
+## ADDITIONAL ENTRY-POINT CONVENTIONS
+
+## FocusPhone Web — claude.md
+
+> This file exists so Claude (and any other AI agent) always has the git
+> workflow rules available, independent of `.docs/` (gitignored) being
+> present locally. For the project overview, tech stack, build commands,
+> code style and key decisions, see [`agents.md`](agents.md) — this file only
+> duplicates the commit / PR / merge / release conventions.
+
+## COMMIT, PR, MERGE & RELEASE GUIDELINES
+
+read `.docs/manager.md` first, then the selected guide in `.docs/-github-guides/`. these files are versioned; this digest also works without opening them.
+
+| request | guide |
+| --- | --- |
+| commit title, body and changelog | `commit-guide.md`, `changelog-guide.md` |
+| pull request or merge | `pr-merge-guide.md`, `branching-guide.md` |
+| version and release | `release-guide.md`, `changelog-guide.md` |
+| permissions and sensitive data | `agent-rules.md` |
+
+- inspect `git status`, both diffs and recent history before describing changes
+- use `<prefix> | <imperative summary>` with `update`, `fix`, `hotfix`, `changes` or `changelog`; keep titles within 72 characters
+- write commit bodies as 2 to 6 markdown bullets, one logical change per line, with literal paths in backticks
+- never add authorship footers, automated attribution, signatures or generation notices; preserve the configured git identity
+- update `changelog.md` under `## SIN PUBLICAR / UNRELEASED` in matching `### CASTELLANO` and `### ENGLISH` sections
+- use the existing changelog category vocabulary and preserve language parity; describe only changes in the actual diff
+- summarize pull requests in 1 to 3 bullets per category and language, at most 110 characters per bullet
+- documentation and repository-management work targets `main`; the remote default is `main`; do not silently promote development work to the default branch
+- the authorization for a requested action remains valid throughout that task; creating a pull request includes pushing its branch, but does not authorize merging or publishing
+- use merge commits when a merge is requested; never force-push, rewrite published history or remove branches without an explicit instruction
+- releases use the approved version and an immutable tag on the verified release commit, with english notes from the closed changelog; do not create a release for documentation work
+- deliver requested titles, bodies and changelog fragments in separate code blocks; report executed actions with their commit hash or pull request link

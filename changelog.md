@@ -27,6 +27,9 @@
 - añadir el enlace directo de descarga al apk `focusphone-v1.4-beta.apk` en la portada y en `/instalar/`, visible solo cuando `PUBLIC_PROJECT_URL` esta definido, con `site.apk`, `site.tag` y `site.stage` en `src/data/site.ts` como fuente unica
 
 #### CAMBIADO
+
+- completar las guías de gestión y el contexto específico del proyecto; conservar las reglas técnicas y verificar las rutas
+- corregir el ejemplo de promociones entre ramas para evitar destinos idénticos al origen
 - actualizar la web a la version `1.4` beta (`v1.4-beta`) de la app: version y etapa en `src/data/site.ts`, cuadricula de inicio, 20 widgets integrados, pausa consciente guiada y bloqueo de 5 intentos con 15 minutos de espera, y tarjeta social
 - ignorar `.docs/`, `node_modules/`, `dist/`, `.astro/`, `.env*` (salvo `.env.example`) y los artefactos de prueba en el `.gitignore` de la raiz, que estaba vacio
 - sustituir el `readme.md` anterior por una version centrada en la presentacion del proyecto y corregir las referencias a ficheros y flujos de ci que no existian en este repositorio
@@ -65,6 +68,9 @@
 - add the direct download link to `focusphone-v1.4-beta.apk` on the home page and `/instalar/`, shown only when `PUBLIC_PROJECT_URL` is set, with `site.apk`, `site.tag` and `site.stage` in `src/data/site.ts` as the single source
 
 #### CHANGED
+
+- complete repository management guides and project-specific context; preserve technical rules and verify paths
+- correct the branch promotion example to avoid destinations identical to the source
 - update the site to app version `1.4` beta (`v1.4-beta`): version and stage in `src/data/site.ts`, home grid, 20 built-in widgets, guided conscious pause, 5-attempt lockout with a 15-minute cooldown, and the social card
 - ignore `.docs/`, `node_modules/`, `dist/`, `.astro/`, `.env*` (except `.env.example`) and test artifacts in the root `.gitignore`, which was empty
 - replace the previous `readme.md` with a project-presentation version and fix references to files and ci workflows that did not exist in this repository
