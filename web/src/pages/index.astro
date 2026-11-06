@@ -27,7 +27,7 @@ const appSchema = {
       <div class="container hero-grid">
         <div class="hero-copy">
           <a href="#descargar" class="alpha-label">
-            <span class="status-dot"></span>v{site.version} alpha · android 7.0+{' '}
+            <span class="status-dot"></span>v{site.version} {site.stage} · android 7.0+{' '}
             <Icon name="ArrowUpRight" size={14} />
           </a>
           <h1 id="hero-title">
@@ -219,14 +219,14 @@ const appSchema = {
             <article>
               <Icon name="LayoutGrid" size={23} />
               <h3>tu propio espacio.</h3>
-              <p>Organiza el reloj, tus apps y widgets en una cuadrícula que puedes ajustar.</p>
+              <p>Organiza el reloj, tus apps y widgets en una cuadrícula de 3 a 6 columnas que arrastras y redimensionas.</p>
             </article>
             <article>
               <Icon name="Sun" size={23} />
               <h3>calma a cualquier hora.</h3>
               <p>Cuatro temas, colores personalizados y un modo que sigue el día y la noche.</p>
             </article>
-            <span class="stage-footnote">5 estilos de reloj · 20 widgets propios</span>
+            <span class="stage-footnote">5 estilos de reloj · 20 widgets integrados</span>
           </div>
         </div>
       </div>
@@ -367,7 +367,7 @@ const appSchema = {
             </h3>
             <p>
               Una sesión con temporizador que bloquea las apps. Termina por sí sola; para salir antes,
-              necesitas tu contraseña.
+              necesitas tu contraseña, con 5 intentos y una pausa de 15 minutos si fallas.
             </p>
             <div class="detox-preview">
               <span>30:00</span>
@@ -412,7 +412,7 @@ const appSchema = {
           </h2>
           <p>A veces solo necesitas un segundo para preguntarte: ¿para qué he venido?</p>
           <p>
-            Activa una respiración guiada antes de abrir una app. Un pequeño espacio entre el impulso y tu
+            Activa una respiración guiada antes de abrir una app, con un aviso háptico y, si tiene límite diario, los minutos que te quedan. Un pequeño espacio entre el impulso y tu
             decisión.
           </p>
           <button type="button" class="button button-outline" id="breath-start">
@@ -474,7 +474,7 @@ const appSchema = {
             <br />
             <span class="muted-heading">y se puede comprobar.</span>
           </h2>
-          <p>Estamos en alpha. Explora cómo funciona y consulta el estado de su publicación.</p>
+          <p>Estamos en beta. Explora cómo funciona y consulta el estado de su publicación.</p>
         </div>
         <div class="project-links" data-stagger>
           <a href={site.repository}>
@@ -699,7 +699,7 @@ const appSchema = {
     <section class="download" id="descargar" aria-labelledby="download-title">
       <div class="container download-inner" data-animate>
         <span class="alpha-label">
-          <span class="status-dot"></span>v{site.version} alpha · para android 7.0+
+          <span class="status-dot"></span>v{site.version} {site.stage} · para android 7.0+
         </span>
         <h2 id="download-title">
           un nuevo inicio.
@@ -714,12 +714,12 @@ const appSchema = {
         <div class="download-actions">
           <a
             class="button button-light"
-            href={site.releases}
-            data-conversion={site.publicProject ? 'releases' : 'availability'}
+            href={site.apk ?? site.releases}
+            data-conversion={site.publicProject ? 'apk' : 'availability'}
             data-location="download"
           >
             <Icon name="Download" size={18} />
-            {site.publicProject ? 'ver descargas en GitHub' : 'consultar disponibilidad'}{' '}
+            {site.publicProject ? `descargar apk ${site.tag}` : 'consultar disponibilidad'}{' '}
             <Icon name="ArrowUpRight" size={18} />
           </a>
           <a
@@ -733,10 +733,10 @@ const appSchema = {
           </a>
         </div>
         <p class="download-note">
-          Estamos en alpha y seguimos afinando la experiencia.
+          Estamos en beta y seguimos afinando la experiencia.
           <br />
           {site.publicProject
-            ? 'Consulta los APK disponibles en Releases. Aún no está en Google Play.'
+            ? 'Descarga el APK o consulta las notas en Releases. Aún no está en Google Play.'
             : 'La descarga pública todavía no está disponible. Aún no está en Google Play.'}
         </p>
         <a href="/instalar/" class="installation-link">

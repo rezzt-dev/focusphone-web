@@ -14,7 +14,7 @@ FocusPhone, a minimalist Android launcher (text-only home screen, focus
 profiles, a conscious pause before opening apps). It is independent from the
 Android app: no backend, no accounts, no analytics, no cookies.
 
-- **Current app version shown:** `1.0.6` alpha (source of truth: `web/src/data/site.ts`).
+- **Current app version shown:** `1.4` beta (`v1.4-beta`) (source of truth: `web/src/data/site.ts`).
 - **Canonical origin:** `https://focusphone.rezzt.dev` (default, overridable via `PUBLIC_SITE_URL`).
 - **Language of the site:** Spanish, lowercase headings in the app's calm voice, sentence-case body copy.
 - **Status:** not deployed from this repository. No Google Play listing, and no public APK yet.
@@ -193,7 +193,7 @@ Native page transitions keep the header and reverse direction when returning hom
 ### Updating the app version
 
 1. Edit `version` and the FAQ strings in `web/src/data/site.ts`.
-2. Check the "alpha" copy in `index.astro`, `instalar.astro` and structured data.
+2. Check the "beta" copy (`site.stage`) in `index.astro`, `instalar.astro` and structured data.
 3. `npm run prepare:assets` to regenerate the social card.
 4. `npm run build:production`.
 

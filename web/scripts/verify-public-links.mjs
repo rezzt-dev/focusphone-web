@@ -8,7 +8,7 @@ if (project) {
     project,
     `${project}/releases`,
     `${project}/issues`,
-    `${project}/tree/main/documentation/es`
+    `${project}/blob/main/README.md`
   ]) {
     const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
     assert(response.ok, `Public destination unavailable: ${url} (${response.status})`);

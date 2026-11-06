@@ -29,7 +29,7 @@ import { site } from '../data/site';
         </p>
         <div class="notice" id="disponibilidad">
           <p>
-            <strong>FocusPhone está en fase alpha (v{site.version}).</strong> Es una versión en desarrollo.
+            <strong>FocusPhone está en fase beta (v{site.version}).</strong> Es una versión de pruebas.
             {site.publicProject
               ? 'Consulta las notas y los APK disponibles en GitHub antes de instalarla.'
               : 'La descarga pública del APK todavía no está disponible. Publicaremos aquí su acceso cuando esté listo.'}{' '}
@@ -52,6 +52,16 @@ import { site } from '../data/site';
           {site.publicProject ? 'consultar descargas oficiales' : 'estado del proyecto'}
           <Icon name="ArrowUpRight" size={17} />
         </a>
+        {
+          site.apk && (
+            <p>
+              <a href={site.apk} data-conversion="apk" data-location="install">
+                focusphone-{site.tag}.apk
+              </a>{' '}
+              (4,4 MB). Huella SHA-256: <code>{site.apkSha256}</code>
+            </p>
+          )
+        }
         <h2>2. instala la aplicación</h2>
         <p>
           Abre el APK descargado. Android puede pedirte que permitas instalar aplicaciones desde el navegador
@@ -77,7 +87,7 @@ import { site } from '../data/site';
           mapas, música y notas. Las demás siguen disponibles en el cajón de aplicaciones.
         </p>
         <p>
-          Después, explora los temas, los estilos de reloj, los widgets y los perfiles. Los servicios de
+          Después, explora la cuadrícula de inicio (mantén pulsado un hueco para editarla), los 20 widgets integrados, los temas, los estilos de reloj y los perfiles. Los servicios de
           accesibilidad y notificaciones son opcionales: activa solo los que necesites.
         </p>
         <h2>¿quieres volver a tu launcher anterior?</h2>

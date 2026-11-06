@@ -5,14 +5,18 @@ if (publicProject && !/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+$/.test(publicPro
 
 export const site = {
   name: 'focusphone',
-  version: '1.0.6',
+  version: '1.4',
+  stage: 'beta',
+  tag: 'v1.4-beta',
   publicProject: Boolean(publicProject),
   repository: publicProject ?? '/proyecto/',
   releases: publicProject ? `${publicProject}/releases` : '/instalar/#disponibilidad',
-  documentation: publicProject ? `${publicProject}/tree/main/documentation/es` : '/instalar/',
+  apk: publicProject ? `${publicProject}/releases/download/v1.4-beta/focusphone-v1.4-beta.apk` : undefined,
+  apkSha256: '0818562f13b4f950cce4b315e7a0956bb051695cbce27e426a5adaba78e119eb',
+  documentation: publicProject ? `${publicProject}#readme` : '/instalar/',
   issues: publicProject ? `${publicProject}/issues` : '/#participa',
   description:
-    'Un launcher minimalista para Android. Una pantalla de inicio de solo texto, perfiles de concentración y una pausa para volver a elegir. Descubre FocusPhone.'
+    'Un launcher minimalista para Android. Una pantalla de inicio de solo texto con cuadrícula y widgets, perfiles de concentración y una pausa guiada para volver a elegir. Descubre FocusPhone.'
 };
 
 export const faqs = [
@@ -29,8 +33,8 @@ export const faqs = [
   {
     question: '¿dónde puedo descargarlo?',
     answer: publicProject
-      ? 'El proyecto está en fase alpha, versión 1.0.6. Consulta los APK publicados en GitHub Releases y la guía de instalación. Todavía no se distribuye en Google Play.'
-      : 'El proyecto está en fase alpha, versión 1.0.6. La descarga pública todavía no está disponible. Consulta su estado en la guía de instalación. Todavía no se distribuye en Google Play.'
+      ? 'El proyecto está en fase beta, versión 1.4. Descarga el APK desde GitHub Releases y sigue la guía de instalación. Todavía no se distribuye en Google Play.'
+      : 'El proyecto está en fase beta, versión 1.4. La descarga pública todavía no está disponible. Consulta su estado en la guía de instalación. Todavía no se distribuye en Google Play.'
   },
   {
     question: '¿tengo que desinstalar mis aplicaciones?',

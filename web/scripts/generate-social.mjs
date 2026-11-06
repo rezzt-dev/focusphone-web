@@ -12,7 +12,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
 <text x="75" y="265" fill="#e0e0e0" font-family="sans-serif" font-size="86" letter-spacing="-3">menos pantalla.</text>
 <text x="75" y="365" fill="#9e9e9e" font-family="sans-serif" font-size="86" letter-spacing="-3">más vida.</text>
 <text x="80" y="462" fill="#b0b0b0" font-family="sans-serif" font-size="23">un nuevo inicio para tu android.</text>
-<text x="80" y="550" fill="#9e9e9e" font-family="sans-serif" font-size="17">android 7.0+ · sin anuncios · sin cuentas · v1.0.6 alpha</text>
+<text x="80" y="550" fill="#9e9e9e" font-family="sans-serif" font-size="17">android 7.0+ · sin anuncios · sin cuentas · v1.4 beta</text>
 <rect x="885" y="116" width="211" height="410" rx="26" fill="#111" stroke="#555" stroke-width="3"/>
 <text x="990" y="227" text-anchor="middle" fill="#e0e0e0" font-family="sans-serif" font-size="45">09:41</text>
 <text x="990" y="254" text-anchor="middle" fill="#999" font-family="sans-serif" font-size="10">un momento para ti.</text>

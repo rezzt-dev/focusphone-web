@@ -1,0 +1,8 @@
+minimumReleaseAgeExclude:
+  - '@astrojs/internal-helpers@0.13.1'
+  - '@astrojs/markdown-satteri@0.4.7'
+  - '@lucide/astro@1.69.0'
+  - '@playwright/test@1.65.0'
+  - astro@7.4.7
+  - playwright-core@1.65.0
+  - playwright@1.65.0

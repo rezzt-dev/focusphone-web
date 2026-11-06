@@ -14,7 +14,7 @@ una pantalla de inicio de solo texto, perfiles de concentración y una pausa par
 <br><br>
 
 <img src="https://img.shields.io/badge/web-1.0.0-000000?style=for-the-badge" alt="versión de la web 1.0.0" />
-<img src="https://img.shields.io/badge/app-1.0.6%20alpha-181818?style=for-the-badge&logo=android&logoColor=3DDC84" alt="focusphone 1.0.6 alpha" />
+<img src="https://img.shields.io/badge/app-1.4%20beta-181818?style=for-the-badge&logo=android&logoColor=3DDC84" alt="focusphone 1.4 beta" />
 <img src="https://img.shields.io/badge/astro-7-BC52EE?style=for-the-badge&logo=astro&logoColor=white" alt="astro 7" />
 <img src="https://img.shields.io/badge/tailwind-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="tailwind css 4" />
 
@@ -73,7 +73,7 @@ la web hace tres cosas:
    está diseñado para que pases por la pantalla de inicio, no para que te quedes en ella.
 2. **deja probar el producto antes de instalarlo**: un teléfono html/css interactivo con temas,
    relojes y perfiles, y una pausa de respiración consciente.
-3. **es honesta con el estado del proyecto**: la app está en alpha `1.0.6`, no se anuncia en
+3. **es honesta con el estado del proyecto**: la app está en beta `1.4`, no se anuncia en
    google play y no hay descargas ni enlaces que no existan.
 
 > los teléfonos de la web son **representaciones ilustrativas** en html/css, no capturas oficiales.
@@ -321,7 +321,7 @@ la carpeta `.docs/project-docs/` recoge las decisiones de producto y diseño de 
 
 ## CONTRIBUIR
 
-esta web acompaña a un proyecto en alpha mantenido por una sola persona. las sugerencias son
+esta web acompaña a un proyecto en beta mantenido por una sola persona. las sugerencias son
 bienvenidas, sobre todo en accesibilidad, textos y compatibilidad de navegadores.
 
 - antes de abrir una pr, ejecuta `npm run check`, `npm run format:check` y `npm run test:e2e`.

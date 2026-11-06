@@ -24,12 +24,18 @@
 - añadir `agents.md` y `claude.md` con la guia del proyecto para agentes y las convenciones de commit, pr, merge y release
 - añadir `.docs/project-docs/` con los documentos de producto, diseño, movimiento y auditoria de la web, y `.docs/commit-guidelines.md` y `.docs/pr-merge-release-guidelines.md`
 - añadir `changelog.md` con el formato bilingue y las cinco categorias cerradas
+- añadir el enlace directo de descarga al apk `focusphone-v1.4-beta.apk` en la portada y en `/instalar/`, visible solo cuando `PUBLIC_PROJECT_URL` esta definido, con `site.apk`, `site.tag` y `site.stage` en `src/data/site.ts` como fuente unica
 
 #### CAMBIADO
+- actualizar la web a la version `1.4` beta (`v1.4-beta`) de la app: version y etapa en `src/data/site.ts`, cuadricula de inicio, 20 widgets integrados, pausa consciente guiada y bloqueo de 5 intentos con 15 minutos de espera, y tarjeta social
 - ignorar `.docs/`, `node_modules/`, `dist/`, `.astro/`, `.env*` (salvo `.env.example`) y los artefactos de prueba en el `.gitignore` de la raiz, que estaba vacio
 - sustituir el `readme.md` anterior por una version centrada en la presentacion del proyecto y corregir las referencias a ficheros y flujos de ci que no existian en este repositorio
 
+#### CORREGIDO
+- corregir los enlaces a `documentation/es`, que no existe en `main`, apuntando la documentacion y `verify-public-links` al `README.md` del repositorio publico, y quitar de `privacidad.astro` el enlace a un documento inexistente
+
 #### SEGURIDAD
+- publicar la huella sha-256 del apk (`0818562f…`) en `/instalar/` para que se pueda verificar la descarga antes de instalarla
 - declarar la politica de privacidad de la web: sin cookies, sin analitica, sin fuentes ni scripts externos y sin envio de los datos del formulario
 - verificar sin credenciales que los destinos publicos existen y que hay un apk descargable antes de aceptar `PUBLIC_PROJECT_URL` en un build de produccion
 - rechazar origenes `PUBLIC_SITE_URL` con http, credenciales, ruta, parametros o fragmento en `build:production`
@@ -56,12 +62,18 @@
 - add `agents.md` and `claude.md` with the project guide for agents and the commit, pr, merge and release conventions
 - add `.docs/project-docs/` with the website product, design, motion and audit documents, and `.docs/commit-guidelines.md` and `.docs/pr-merge-release-guidelines.md`
 - add `changelog.md` with the bilingual format and the five closed categories
+- add the direct download link to `focusphone-v1.4-beta.apk` on the home page and `/instalar/`, shown only when `PUBLIC_PROJECT_URL` is set, with `site.apk`, `site.tag` and `site.stage` in `src/data/site.ts` as the single source
 
 #### CHANGED
+- update the site to app version `1.4` beta (`v1.4-beta`): version and stage in `src/data/site.ts`, home grid, 20 built-in widgets, guided conscious pause, 5-attempt lockout with a 15-minute cooldown, and the social card
 - ignore `.docs/`, `node_modules/`, `dist/`, `.astro/`, `.env*` (except `.env.example`) and test artifacts in the root `.gitignore`, which was empty
 - replace the previous `readme.md` with a project-presentation version and fix references to files and ci workflows that did not exist in this repository
 
+#### FIXED
+- fix the links to `documentation/es`, which does not exist on `main`, by pointing the documentation link and `verify-public-links` at the public repository `README.md`, and drop the link to a missing document from `privacidad.astro`
+
 #### SECURITY
+- publish the apk sha-256 digest (`0818562f…`) on `/instalar/` so the download can be verified before installing
 - declare the website privacy policy: no cookies, no analytics, no external fonts or scripts and no transmission of form data
 - verify without credentials that public destinations exist and a downloadable apk is available before accepting `PUBLIC_PROJECT_URL` in a production build
 - reject `PUBLIC_SITE_URL` origins with http, credentials, path, query or fragment in `build:production`
