@@ -27,6 +27,7 @@
 - añadir el enlace directo de descarga al apk `focusphone-v1.4-beta.apk` en la portada y en `/instalar/`, visible solo cuando `PUBLIC_PROJECT_URL` esta definido, con `site.apk`, `site.tag` y `site.stage` en `src/data/site.ts` como fuente unica
 
 #### CAMBIADO
+- exigir español de españa y conservar `ñ` y `Ñ`, incluso en formatos que pidan escribir sin acentos
 
 - completar las guías de gestión y el contexto específico del proyecto; conservar las reglas técnicas y verificar las rutas
 - corregir el ejemplo de promociones entre ramas para evitar destinos idénticos al origen
@@ -68,6 +69,7 @@
 - add the direct download link to `focusphone-v1.4-beta.apk` on the home page and `/instalar/`, shown only when `PUBLIC_PROJECT_URL` is set, with `site.apk`, `site.tag` and `site.stage` in `src/data/site.ts` as the single source
 
 #### CHANGED
+- require spanish from spain and preserve `ñ` and `Ñ`, including formats that omit vowel accents
 
 - complete repository management guides and project-specific context; preserve technical rules and verify paths
 - correct the branch promotion example to avoid destinations identical to the source
